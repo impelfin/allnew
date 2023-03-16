@@ -1,4 +1,0 @@
-# .gitignore
-
-**/c/gcc/a.out
-**/c/gcc/*.o
