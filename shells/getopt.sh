@@ -5,9 +5,9 @@ set -- $(getopt -q ab:cd "$@")
 echo
 while [ -n "$1" ]
 do
-	case "$1" in 
+	case "$1" in
 	-a) echo "Found the -a option" ;;
-	-b) param="$2" 
+	-b) param="$2"
 	    echo "Found the -b option, with parameter value $param"
 	    shift ;;
 	-c) echo "Found the -c option" ;;
