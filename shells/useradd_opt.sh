@@ -16,13 +16,16 @@ do
 	    echo "-c (comment) option, parameter value : $param"
 	    shift ;;
 	-d) param="$2"
-			echo "-d (home directory) option, parameter value : $param"
-			shift ;;
+     	    echo "-d (home directory) option, parameter value : $param"
+	    shift ;;
+	-s) param="$2"
+            echo "-s (shell) option, parameter value : $param"
+	    shift ;;
 	-k) param="$2"
-			echo "-k (set initial scripts directory) option, parameter value : $param"
-			shift ;;
-  -m) echo "-m (make home directory) option" ;;
-  --) shift
+	    echo "-k (initial scripts directory) option, parameter value : $param"
+	    shift ;;
+        -m) echo "-m (make home directory) option" ;;
+        --) shift
 	    break ;;
 	*) echo "$1 is not an option" ;;
 	esac
