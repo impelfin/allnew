@@ -1,4 +1,4 @@
-# .gitignore
+## .gitignore
 
 .ftpconfig
 
@@ -7,7 +7,6 @@ c/**/a.out
 c/**/hello
 c/**/*.o
 c/**/test
-
 
 ## java
 java/*.class
@@ -18,3 +17,6 @@ scala/**/target
 
 ## maven
 maven/target
+
+## nodejs
+node/**/node_modules
