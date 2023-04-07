@@ -1,6 +1,8 @@
 ## .gitignore
-
 .ftpconfig
+
+# environment files
+.env
 
 ## c programing
 c/**/a.out
