@@ -31,3 +31,7 @@ mongodb/*.json
 mongodb/**/*.json
 mongodb/**/*.mp4
 mongodb/backup
+
+## oracle
+oracle/node/node_modules
+oracle/node/package-lock.json
