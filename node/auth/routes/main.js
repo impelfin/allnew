@@ -37,16 +37,16 @@ app.post('/select', (req, res) => {
 
 // request O, query O
 app.get('/selectQuery', (req, res) => {
-    const userid = req.query.userid;
-    const result = connection.query("select * from user where userid=?", [userid]);
+    const id = req.query.id;
+    const result = connection.query("select * from user where userid=?", [id]);
     console.log(result);
     res.send(result);
 })
 
 // request O, query O
 app.post('/selectQuery', (req, res) => {
-    const userid = req.body.userid;
-    const result = connection.query("select * from user where userid=?", [userid]);
+    const id = req.body.id;
+    const result = connection.query("select * from user where userid=?", [id]);
     console.log(result);
     res.send(result);
 })
