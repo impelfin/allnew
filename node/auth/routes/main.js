@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('sync-mysql');
+const CircularJSON = require('circular-json')
 const env = require('dotenv').config({ path: "../../.env" });
 
 var connection = new mysql({
@@ -20,6 +21,41 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/hello', (req, res) => {
     res.send('Hello World~!!')
 })
+
+// login
+app.post('/login', (req, res) => {
+    const { id, pw } = req.body;
+    const result = connection.query("select * from user where userid=? and passwd=?", [id, pw]);
+    if (result.length == 0) {
+        res.redirect('error.html')
+    }
+    if (id == 'admin' || id == 'root') {
+        console.log(id + " => Administrator Logined")
+        res.redirect('member.html')
+    } else {
+        console.log(id + " => User Logined")
+        res.redirect('main.html')
+
+    }
+})
+
+// request O, query O
+app.post('/register', (req, res) => {
+    const { id, pw } = req.body;
+    const result = connection.query("insert into user values (?, ?)", [id, pw]);
+    console.log(result);
+    res.redirect('/');
+})
+
+
+// register
+app.post('/insert', (req, res) => {
+    const { id, pw } = req.body;
+    const result = connection.query("insert into user values (?, ?)", [id, pw]);
+    console.log(result);
+    res.redirect('/selectQuery?id=' + req.body.id);
+})
+
 
 // request O, query X
 app.get('/select', (req, res) => {
@@ -46,6 +82,7 @@ app.get('/selectQuery', (req, res) => {
 // request O, query O
 app.post('/selectQuery', (req, res) => {
     const id = req.body.id;
+    // console.log(req.body);
     const result = connection.query("select * from user where userid=?", [id]);
     console.log(result);
     res.send(result);
@@ -56,7 +93,7 @@ app.post('/insert', (req, res) => {
     const { id, pw } = req.body;
     const result = connection.query("insert into user values (?, ?)", [id, pw]);
     console.log(result);
-    res.redirect('/selectQuery?userid=' + req.body.id);
+    res.redirect('/selectQuery?id=' + req.body.id);
 })
 
 // request O, query O
@@ -64,7 +101,7 @@ app.post('/update', (req, res) => {
     const { id, pw } = req.body;
     const result = connection.query("update user set passwd=? where userid=?", [pw, id]);
     console.log(result);
-    res.redirect('/selectQuery?userid=' + req.body.id);
+    res.redirect('/selectQuery?id=' + req.body.id);
 })
 
 // request O, query O
@@ -76,3 +113,4 @@ app.post('/delete', (req, res) => {
 })
 
 module.exports = app;
+

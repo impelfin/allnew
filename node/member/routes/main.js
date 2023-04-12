@@ -46,6 +46,7 @@ app.get('/selectQuery', (req, res) => {
 // request O, query O
 app.post('/selectQuery', (req, res) => {
     const id = req.body.id;
+    // console.log(req.body);
     const result = connection.query("select * from user where userid=?", [id]);
     console.log(result);
     res.send(result);
@@ -56,7 +57,7 @@ app.post('/insert', (req, res) => {
     const { id, pw } = req.body;
     const result = connection.query("insert into user values (?, ?)", [id, pw]);
     console.log(result);
-    res.redirect('/selectQuery?userid=' + req.body.id);
+    res.redirect('/selectQuery?id=' + req.body.id);
 })
 
 // request O, query O
@@ -64,7 +65,7 @@ app.post('/update', (req, res) => {
     const { id, pw } = req.body;
     const result = connection.query("update user set passwd=? where userid=?", [pw, id]);
     console.log(result);
-    res.redirect('/selectQuery?userid=' + req.body.id);
+    res.redirect('/selectQuery?id=' + req.body.id);
 })
 
 // request O, query O
