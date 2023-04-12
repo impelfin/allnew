@@ -39,23 +39,13 @@ app.post('/login', (req, res) => {
     }
 })
 
-// request O, query O
+// register
 app.post('/register', (req, res) => {
     const { id, pw } = req.body;
     const result = connection.query("insert into user values (?, ?)", [id, pw]);
     console.log(result);
     res.redirect('/');
 })
-
-
-// register
-app.post('/insert', (req, res) => {
-    const { id, pw } = req.body;
-    const result = connection.query("insert into user values (?, ?)", [id, pw]);
-    console.log(result);
-    res.redirect('/selectQuery?id=' + req.body.id);
-})
-
 
 // request O, query X
 app.get('/select', (req, res) => {
