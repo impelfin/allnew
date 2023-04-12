@@ -42,9 +42,13 @@ app.post('/login', (req, res) => {
 // register
 app.post('/register', (req, res) => {
     const { id, pw } = req.body;
-    const result = connection.query("insert into user values (?, ?)", [id, pw]);
-    console.log(result);
-    res.redirect('/');
+    if (id == "") {
+        res.redirect('register.html')
+    } else {
+        const result = connection.query("insert into user values (?, ?)", [id, pw]);
+        console.log(result);
+        res.redirect('/');
+    }
 })
 
 // request O, query X
