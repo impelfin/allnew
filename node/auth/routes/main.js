@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('sync-mysql');
-const CircularJSON = require('circular-json')
 const env = require('dotenv').config({ path: "../../.env" });
 
 var connection = new mysql({
@@ -26,6 +25,7 @@ app.get('/hello', (req, res) => {
 app.post('/login', (req, res) => {
     const { id, pw } = req.body;
     const result = connection.query("select * from user where userid=? and passwd=?", [id, pw]);
+    // console.log(result);
     if (result.length == 0) {
         res.redirect('error.html')
     }
