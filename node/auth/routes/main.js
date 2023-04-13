@@ -18,6 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 function template_nodata(res) {
+    res.writeHead(200);
     var template = `
     <!doctype html>
     <html>
@@ -35,6 +36,7 @@ function template_nodata(res) {
 }
 
 function template_result(result, res) {
+    res.writeHead(200);
     var template = `
     <!doctype html>
     <html>
@@ -127,7 +129,6 @@ app.get('/select', (req, res) => {
     const result = connection.query('select * from user');
     console.log(result);
     // res.send(result);
-    res.writeHead(200);
     if (result.length == 0) {
         template_nodata(res)
     } else {
@@ -140,7 +141,6 @@ app.post('/select', (req, res) => {
     const result = connection.query('select * from user');
     console.log(result);
     // res.send(result);
-    res.writeHead(200);
     if (result.length == 0) {
         template_nodata(res)
     } else {
@@ -157,7 +157,6 @@ app.get('/selectQuery', (req, res) => {
         const result = connection.query("select * from user where userid=?", [id]);
         console.log(result);
         // res.send(result);
-        res.writeHead(200);
         if (result.length == 0) {
             template_nodata(res)
         } else {
@@ -175,7 +174,6 @@ app.post('/selectQuery', (req, res) => {
         const result = connection.query("select * from user where userid=?", [id]);
         console.log(result);
         // res.send(result);
-        res.writeHead(200);
         if (result.length == 0) {
             template_nodata(res)
         } else {
@@ -226,13 +224,12 @@ app.post('/update', (req, res) => {
         const result = connection.query("select * from user where userid=?", [id]);
         console.log(result);
         // res.send(result);
-        res.writeHead(200);
         if (result.length == 0) {
             template_nodata(res)
         } else {
             const result = connection.query("update user set passwd=? where userid=?", [pw, id]);
             console.log(result);
-            res.redirect('/selectQuery?id=' + req.body.id);
+            res.redirect('/selectQuery?id=' + id);
         }
     }
 })
@@ -247,7 +244,6 @@ app.post('/delete', (req, res) => {
         const result = connection.query("select * from user where userid=?", [id]);
         console.log(result);
         // res.send(result);
-        res.writeHead(200);
         if (result.length == 0) {
             template_nodata(res)
         } else {
@@ -259,4 +255,3 @@ app.post('/delete', (req, res) => {
 })
 
 module.exports = app;
-
