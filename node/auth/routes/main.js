@@ -100,21 +100,21 @@ app.post('/register', (req, res) => {
         if (result.length > 0) {
             res.writeHead(200);
             var template = `
-        <!doctype html>
-        <html>
-        <head>
-            <title>Error</title>
-            <meta charset="utf-8">
-        </head>
-        <body>
-            <div>
-                <h3 style="margin-left: 30px">Registrer Failed</h3>
-                <h4 style="margin-left: 30px">이미 존재하는 아이디입니다.</h4>
-                <a href="register.html" style="margin-left: 30px">다시 시도하기</a>
-            </div>
-        </body>
-        </html>
-        `;
+                <!doctype html>
+                <html>
+                <head>
+                    <title>Error</title>
+                    <meta charset="utf-8">
+                </head>
+                <body>
+                    <div>
+                        <h3 style="margin-left: 30px">Registrer Failed</h3>
+                        <h4 style="margin-left: 30px">이미 존재하는 아이디입니다.</h4>
+                        <a href="register.html" style="margin-left: 30px">다시 시도하기</a>
+                    </div>
+                </body>
+                </html>
+                `;
             res.end(template);
         } else {
             result = connection.query("insert into user values (?, ?)", [id, pw]);
@@ -192,20 +192,20 @@ app.post('/insert', (req, res) => {
         if (result.length > 0) {
             res.writeHead(200);
             var template = `
-        <!doctype html>
-        <html>
-        <head>
-            <title>Error</title>
-            <meta charset="utf-8">
-        </head>
-        <body>
-            <div>
-                <h3 style="margin-left: 30px">Registrer Failed</h3>
-                <h4 style="margin-left: 30px">이미 존재하는 아이디입니다.</h4>
-            </div>
-        </body>
-        </html>
-        `;
+                <!doctype html>
+                <html>
+                <head>
+                    <title>Error</title>
+                    <meta charset="utf-8">
+                </head>
+                <body>
+                    <div>
+                        <h3 style="margin-left: 30px">Registrer Failed</h3>
+                        <h4 style="margin-left: 30px">이미 존재하는 아이디입니다.</h4>
+                    </div>
+                </body>
+                </html>
+                `;
             res.end(template);
         } else {
             result = connection.query("insert into user values (?, ?)", [id, pw]);
