@@ -25,14 +25,110 @@ app.get('/hello', (req, res) => {
 app.get('/select', (req, res) => {
     const result = connection.query('select * from user');
     console.log(result);
-    res.send(result);
+    // res.send(result);
+    res.writeHead(200);
+    if (result.length == 0) {
+        var template = `
+        <!doctype html>
+        <html>
+        <head>
+            <title>Result</title>
+            <meta charset="utf-8">
+            <link type="text/css" rel="stylesheet" href="mystyle.css" />
+        </head>
+        <body>
+            <h3>데이터가 존재하지 않습니다.</h3>
+        </body>
+        </html>
+        `;
+        res.end(template);
+    } else {
+        var template = `
+        <!doctype html>
+        <html>
+        <head>
+            <title>Result</title>
+            <meta charset="utf-8">
+            <link type="text/css" rel="stylesheet" href="mystyle.css" />
+        </head>
+        <body>
+        <table border="1" style="margin:auto;">
+        <thead>
+            <tr><th>User ID</th><th>Password</th></tr>
+        </thead>
+        <tbody>
+        `;
+        for (var i = 0; i < result.length; i++) {
+            template += `
+        <tr>
+            <td>${result[i]['userid']}</td>
+            <td>${result[i]['passwd']}</td>
+        </tr>
+        `;
+        }
+        template += `
+        </tbody>
+        </table>
+        </body>
+        </html>
+        `;
+        res.end(template);
+    }
 })
 
 // request O, query X
 app.post('/select', (req, res) => {
     const result = connection.query('select * from user');
     console.log(result);
-    res.send(result);
+    // res.send(result);
+    res.writeHead(200);
+    if (result.length == 0) {
+        var template = `
+        <!doctype html>
+        <html>
+        <head>
+            <title>Result</title>
+            <meta charset="utf-8">
+            <link type="text/css" rel="stylesheet" href="mystyle.css" />
+        </head>
+        <body>
+            <h3>데이터가 존재하지 않습니다.</h3>
+        </body>
+        </html>
+        `;
+        res.end(template);
+    } else {
+        var template = `
+        <!doctype html>
+        <html>
+        <head>
+            <title>Result</title>
+            <meta charset="utf-8">
+            <link type="text/css" rel="stylesheet" href="mystyle.css" />
+        </head>
+        <body>
+        <table border="1" style="margin:auto;">
+        <thead>
+            <tr><th>User ID</th><th>Password</th></tr>
+        </thead>
+        <tbody>
+        `;
+        for (var i = 0; i < result.length; i++) {
+            template += `
+        <tr>
+            <td>${result[i]['userid']}</td>
+            <td>${result[i]['passwd']}</td>
+        </tr>
+        `;
+        }
+        template += `
+        </tbody>
+        </table>
+        </body>
+        </html>
+        `;
+        res.end(template);
+    }
 })
 
 // request O, query O
@@ -40,7 +136,55 @@ app.get('/selectQuery', (req, res) => {
     const id = req.query.id;
     const result = connection.query("select * from user where userid=?", [id]);
     console.log(result);
-    res.send(result);
+    // res.send(result);
+    res.writeHead(200);
+    if (result.length == 0) {
+        var template = `
+        <!doctype html>
+        <html>
+        <head>
+            <title>Result</title>
+            <meta charset="utf-8">
+            <link type="text/css" rel="stylesheet" href="mystyle.css" />
+        </head>
+        <body>
+            <h3>데이터가 존재하지 않습니다.</h3>
+        </body>
+        </html>
+        `;
+        res.end(template);
+    } else {
+        var template = `
+        <!doctype html>
+        <html>
+        <head>
+            <title>Result</title>
+            <meta charset="utf-8">
+            <link type="text/css" rel="stylesheet" href="mystyle.css" />
+        </head>
+        <body>
+        <table border="1" style="margin:auto;">
+        <thead>
+            <tr><th>User ID</th><th>Password</th></tr>
+        </thead>
+        <tbody>
+        `;
+        for (var i = 0; i < result.length; i++) {
+            template += `
+        <tr>
+            <td>${result[i]['userid']}</td>
+            <td>${result[i]['passwd']}</td>
+        </tr>
+        `;
+        }
+        template += `
+        </tbody>
+        </table>
+        </body>
+        </html>
+        `;
+        res.end(template);
+    }
 })
 
 // request O, query O
@@ -49,7 +193,55 @@ app.post('/selectQuery', (req, res) => {
     // console.log(req.body);
     const result = connection.query("select * from user where userid=?", [id]);
     console.log(result);
-    res.send(result);
+    // res.send(result);
+    res.writeHead(200);
+    if (result.length == 0) {
+        var template = `
+        <!doctype html>
+        <html>
+        <head>
+            <title>Result</title>
+            <meta charset="utf-8">
+            <link type="text/css" rel="stylesheet" href="mystyle.css" />
+        </head>
+        <body>
+            <h3>데이터가 존재하지 않습니다.</h3>
+        </body>
+        </html>
+        `;
+        res.end(template);
+    } else {
+        var template = `
+        <!doctype html>
+        <html>
+        <head>
+            <title>Result</title>
+            <meta charset="utf-8">
+            <link type="text/css" rel="stylesheet" href="mystyle.css" />
+        </head>
+        <body>
+        <table border="1" style="margin:auto;">
+        <thead>
+            <tr><th>User ID</th><th>Password</th></tr>
+        </thead>
+        <tbody>
+        `;
+        for (var i = 0; i < result.length; i++) {
+            template += `
+        <tr>
+            <td>${result[i]['userid']}</td>
+            <td>${result[i]['passwd']}</td>
+        </tr>
+        `;
+        }
+        template += `
+        </tbody>
+        </table>
+        </body>
+        </html>
+        `;
+        res.end(template);
+    }
 })
 
 // request O, query O
