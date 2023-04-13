@@ -17,6 +17,56 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+function template_nodata(res) {
+    var template = `
+    <!doctype html>
+    <html>
+    <head>
+        <title>Result</title>
+        <meta charset="utf-8">
+        <link type="text/css" rel="stylesheet" href="mystyle.css" />
+    </head>
+    <body>
+        <h3>데이터가 존재하지 않습니다.</h3>
+    </body>
+    </html>
+    `;
+    res.end(template);
+}
+
+function template_result(result, res) {
+    var template = `
+    <!doctype html>
+    <html>
+    <head>
+        <title>Result</title>
+        <meta charset="utf-8">
+        <link type="text/css" rel="stylesheet" href="mystyle.css" />
+    </head>
+    <body>
+    <table border="1" style="margin:auto;">
+    <thead>
+        <tr><th>User ID</th><th>Password</th></tr>
+    </thead>
+    <tbody>
+    `;
+    for (var i = 0; i < result.length; i++) {
+        template += `
+    <tr>
+        <td>${result[i]['userid']}</td>
+        <td>${result[i]['passwd']}</td>
+    </tr>
+    `;
+    }
+    template += `
+    </tbody>
+    </table>
+    </body>
+    </html>
+    `;
+    res.end(template);
+}
+
 app.get('/hello', (req, res) => {
     res.send('Hello World~!!')
 })
@@ -79,51 +129,9 @@ app.get('/select', (req, res) => {
     // res.send(result);
     res.writeHead(200);
     if (result.length == 0) {
-        var template = `
-        <!doctype html>
-        <html>
-        <head>
-            <title>Result</title>
-            <meta charset="utf-8">
-            <link type="text/css" rel="stylesheet" href="mystyle.css" />
-        </head>
-        <body>
-            <h3>데이터가 존재하지 않습니다.</h3>
-        </body>
-        </html>
-        `;
-        res.end(template);
+        template_nodata(res)
     } else {
-        var template = `
-        <!doctype html>
-        <html>
-        <head>
-            <title>Result</title>
-            <meta charset="utf-8">
-            <link type="text/css" rel="stylesheet" href="mystyle.css" />
-        </head>
-        <body>
-        <table border="1" style="margin:auto;">
-        <thead>
-            <tr><th>User ID</th><th>Password</th></tr>
-        </thead>
-        <tbody>
-        `;
-        for (var i = 0; i < result.length; i++) {
-            template += `
-        <tr>
-            <td>${result[i]['userid']}</td>
-            <td>${result[i]['passwd']}</td>
-        </tr>
-        `;
-        }
-        template += `
-        </tbody>
-        </table>
-        </body>
-        </html>
-        `;
-        res.end(template);
+        template_result(result, res);
     }
 })
 
@@ -134,51 +142,9 @@ app.post('/select', (req, res) => {
     // res.send(result);
     res.writeHead(200);
     if (result.length == 0) {
-        var template = `
-        <!doctype html>
-        <html>
-        <head>
-            <title>Result</title>
-            <meta charset="utf-8">
-            <link type="text/css" rel="stylesheet" href="mystyle.css" />
-        </head>
-        <body>
-            <h3>데이터가 존재하지 않습니다.</h3>
-        </body>
-        </html>
-        `;
-        res.end(template);
+        template_nodata(res)
     } else {
-        var template = `
-        <!doctype html>
-        <html>
-        <head>
-            <title>Result</title>
-            <meta charset="utf-8">
-            <link type="text/css" rel="stylesheet" href="mystyle.css" />
-        </head>
-        <body>
-        <table border="1" style="margin:auto;">
-        <thead>
-            <tr><th>User ID</th><th>Password</th></tr>
-        </thead>
-        <tbody>
-        `;
-        for (var i = 0; i < result.length; i++) {
-            template += `
-        <tr>
-            <td>${result[i]['userid']}</td>
-            <td>${result[i]['passwd']}</td>
-        </tr>
-        `;
-        }
-        template += `
-        </tbody>
-        </table>
-        </body>
-        </html>
-        `;
-        res.end(template);
+        template_result(result, res);
     }
 })
 
@@ -193,51 +159,9 @@ app.get('/selectQuery', (req, res) => {
         // res.send(result);
         res.writeHead(200);
         if (result.length == 0) {
-            var template = `
-        <!doctype html>
-        <html>
-        <head>
-            <title>Result</title>
-            <meta charset="utf-8">
-            <link type="text/css" rel="stylesheet" href="mystyle.css" />
-        </head>
-        <body>
-            <h3>데이터가 존재하지 않습니다.</h3>
-        </body>
-        </html>
-        `;
-            res.end(template);
+            template_nodata(res)
         } else {
-            var template = `
-        <!doctype html>
-        <html>
-        <head>
-            <title>Result</title>
-            <meta charset="utf-8">
-            <link type="text/css" rel="stylesheet" href="mystyle.css" />
-        </head>
-        <body>
-        <table border="1" style="margin:auto;">
-        <thead>
-            <tr><th>User ID</th><th>Password</th></tr>
-        </thead>
-        <tbody>
-        `;
-            for (var i = 0; i < result.length; i++) {
-                template += `
-        <tr>
-            <td>${result[i]['userid']}</td>
-            <td>${result[i]['passwd']}</td>
-        </tr>
-        `;
-            }
-            template += `
-        </tbody>
-        </table>
-        </body>
-        </html>
-        `;
-            res.end(template);
+            template_result(result, res);
         }
     }
 })
@@ -253,51 +177,9 @@ app.post('/selectQuery', (req, res) => {
         // res.send(result);
         res.writeHead(200);
         if (result.length == 0) {
-            var template = `
-        <!doctype html>
-        <html>
-        <head>
-            <title>Result</title>
-            <meta charset="utf-8">
-            <link type="text/css" rel="stylesheet" href="mystyle.css" />
-        </head>
-        <body>
-            <h3>데이터가 존재하지 않습니다.</h3>
-        </body>
-        </html>
-        `;
-            res.end(template);
+            template_nodata(res)
         } else {
-            var template = `
-        <!doctype html>
-        <html>
-        <head>
-            <title>Result</title>
-            <meta charset="utf-8">
-            <link type="text/css" rel="stylesheet" href="mystyle.css" />
-        </head>
-        <body>
-        <table border="1" style="margin:auto;">
-        <thead>
-            <tr><th>User ID</th><th>Password</th></tr>
-        </thead>
-        <tbody>
-        `;
-            for (var i = 0; i < result.length; i++) {
-                template += `
-        <tr>
-            <td>${result[i]['userid']}</td>
-            <td>${result[i]['passwd']}</td>
-        </tr>
-        `;
-            }
-            template += `
-        </tbody>
-        </table>
-        </body>
-        </html>
-        `;
-            res.end(template);
+            template_result(result, res);
         }
     }
 })
@@ -341,9 +223,17 @@ app.post('/update', (req, res) => {
     if (id == "" || pw == "") {
         res.send('User-id와 Password를 입력하세요.')
     } else {
-        const result = connection.query("update user set passwd=? where userid=?", [pw, id]);
+        const result = connection.query("select * from user where userid=?", [id]);
         console.log(result);
-        res.redirect('/selectQuery?id=' + req.body.id);
+        // res.send(result);
+        res.writeHead(200);
+        if (result.length == 0) {
+            template_nodata(res)
+        } else {
+            const result = connection.query("update user set passwd=? where userid=?", [pw, id]);
+            console.log(result);
+            res.redirect('/selectQuery?id=' + req.body.id);
+        }
     }
 })
 
@@ -354,9 +244,17 @@ app.post('/delete', (req, res) => {
     if (id == "") {
         res.send('User-id를 입력하세요.')
     } else {
-        const result = connection.query("delete from user where userid=?", [id]);
+        const result = connection.query("select * from user where userid=?", [id]);
         console.log(result);
-        res.redirect('/select');
+        // res.send(result);
+        res.writeHead(200);
+        if (result.length == 0) {
+            template_nodata(res)
+        } else {
+            const result = connection.query("delete from user where userid=?", [id]);
+            console.log(result);
+            res.redirect('/select');
+        }
     }
 })
 
