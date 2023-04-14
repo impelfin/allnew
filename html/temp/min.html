@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>가위바위보</title>
+  </head>
+  <body>
+    <h3>가위바위보</h3>
+    <hr />
+    <script>
+      var rsp = [];
+      rsp[1] = "가위";
+      rsp[2] = "바위";
+      rsp[3] = "보";
+      let x = Math.floor(Math.random() * 3 + 1);
+      let y = prompt("가위바위보 중 하나를 선택하세요. (1:가위, 2:바위, 3:보)");
+      y = parseInt(y); //문자열을 숫자로 바꿈
+      let result;
+      if (x == y) {
+        result = "비겼습니다.";
+      } else if (
+        (x == 1 && y == 2) ||
+        (x == 2 && y == 3) ||
+        (x == 3 && y == 1)
+      ) {
+        result = "이겼습니다.";
+      } else {
+        result = "졌습니다.";
+      }
+
+      document.write("내가 낸 거 : " + rsp[y] + "&nbsp;&nbsp;vs&nbsp;&nbsp;");
+      document.write("컴퓨터 : " + rsp[x] + "<br>");
+      document.write("결과 : " + result);
+    </script>
+  </body>
+</html>

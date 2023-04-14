@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+
+  <body>
+    <h3>가위바위보 게임</h3>
+    <hr />
+    <script>
+      let n = prompt("뭘 낼지 선택하세요.(가위: 1, 바위: 2, 보: 3)");
+      let x = Math.floor(Math.random() * 3 + 1);
+      m = parseInt(n);
+
+      var rsp = ["null", "가위", "바위", "보"];
+
+      if (m == x) {
+        document.write(
+          "컴퓨터의 선택 : " +
+            rsp[x] +
+            "<br><br>" +
+            "당신의 선택 : " +
+            rsp[m] +
+            "<br><br><br>" +
+            "비겼습니다!"
+        );
+      } else if (
+        (m == 1 && x == 3) ||
+        (m == 2 && x == 1) ||
+        (m == 3 && x == 2)
+      ) {
+        document.write(
+          "컴퓨터의 선택 : " +
+            rsp[x] +
+            "<br><br>" +
+            "당신의 선택 : " +
+            rsp[m] +
+            "<br><br><br>" +
+            "당신의 승리!"
+        );
+      } else {
+        document.write(
+          "컴퓨터의 선택 : " +
+            rsp[x] +
+            "<br><br>" +
+            "당신의 선택 : " +
+            rsp[m] +
+            "<br><br><br>" +
+            "컴퓨터의 승리!"
+        );
+      }
+    </script>
+  </body>
+</html>
