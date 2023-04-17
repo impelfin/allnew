@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+
+  <body>
+    <h2>랜덤랜덤</h2>
+    <hr />
+    <script>
+      var n = 6;
+      var numbers = new Array(n);
+      var sum = 0;
+
+      document.write("배열의 길이 : " + n + "<br>" + "생성된 배열 : ");
+      for (var i = 0; i < n; i++) {
+        numbers[i] = Math.floor(Math.random() * 10 + 1);
+        document.writeln(numbers[i]);
+      }
+      for (var j = 0; j < n; j++) {
+        sum += numbers[j];
+        if (sum > 3 * n) {
+          document.write(
+            "<br>" +
+              "종료된 시점의 인덱스 값 : numbers[" +
+              j +
+              "]" +
+              "<br>" +
+              "총 합 : " +
+              sum
+          );
+          break;
+        }
+      }
+    </script>
+  </body>
+</html>

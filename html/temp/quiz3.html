@@ -19,14 +19,15 @@
         array[i] = Math.floor(Math.random() * 10 + 1);
         document.writeln(array[i]);
       }
-      for (let i = 0; i < n; i++) {
+      for (i = 0; i < n; i++) {
         sum += array[i];
         if (sum > n * 3) {
-          document.write("<br> 종료 시점의 인덱스 : array[" + i + "]");
+          document.write(
+            "<br> 종료 시점의 인덱스 : array[" + i + "] <br> sum = " + sum
+          );
           break;
         }
       }
-      document.write("<br> sum = " + sum);
     </script>
   </body>
 </html>
