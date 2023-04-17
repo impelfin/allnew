@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>랜덤 배열 생성 후 최대 값 출력</h3>
+    <hr />
+    <script>
+      let count = 0;
+      let max = 0;
+      let arr = [];
+
+      let input = prompt("횟수와 최대값을 입력하세요 (예: 5,10)", "5,10");
+      let inputs = input.split(",");
+      count = parseInt(inputs[0]);
+      max = parseInt(inputs[1]);
+
+      if (count < 5) {
+        document.write("횟수는 5 이상이어야 합니다.");
+      } else if (max > 10) {
+        document.write("최대값은 10 이하여야 합니다.");
+      } else {
+        while (arr.length < count) {
+          let num = Math.floor(Math.random() * max) + 1;
+          if (!arr.includes(num)) {
+            arr.push(num);
+          }
+        }
+        document.write(`배열: ${arr}`);
+      }
+    </script>
+  </body>
+</html>

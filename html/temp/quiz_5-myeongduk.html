@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>출력</title>
+</head>
+
+<body>
+    <h3>랜덤</h3>
+    <hr>
+    <script>
+        var num = prompt("1 ~ 10 사이의 숫자를 입력해주세요.");
+        arr = num.split(",");
+        count = parseInt(arr[0]);
+        max = parseInt(arr[1]);
+        var number = new Array();
+        for (i = 0; i < count; i++) {
+            number[i] = Math.floor(Math.random() * max + 1);
+        }
+        var result = [...new Set(number)];
+        document.write("중복이 아닌 배열 = " + result);
+    </script>
+</body>
+</html>
+</html>
