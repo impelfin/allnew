@@ -48,6 +48,13 @@
       const input_month = input.substr(4, 2);
       var startDay = new Date(input_year + "-" + input_month).getDay();
       var endDay = new Date(input_year, input_month, 0).getDate();
+      document.write(
+        "<h4 style='text-align:center'>" +
+          input_year +
+          " / " +
+          input_month +
+          "</h4>"
+      );
     </script>
     <table id="calendar" border="3" align="center" width="400" height="300">
       <thead>
@@ -67,9 +74,7 @@
           if (i % 7 == 1) document.write("<tr>");
           if (i <= startDay) document.write("<td></td>");
           if (i > startDay) {
-            document.write("<td>");
-            document.write(i - startDay);
-            document.write("</td>");
+            document.write("<td>" + (i - startDay) + "</td>");
           }
           if (i % 7 == 0) document.write("</tr>");
         }
