@@ -55,7 +55,7 @@
       book.rental("임예준", 30);
       let state = { 0: "대여중", 1: "대여가능" };
       document.write(
-        "현재 " + book.title + "는 " + state[this.rentalState] + "입니다."
+        "현재 " + book.title + "는 " + state[book.rentalState] + "입니다."
       );
     </script>
   </body>
