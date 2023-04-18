@@ -10,10 +10,10 @@
         this.totalPage = totalPage;
         this.category = category;
         this.price = price;
-        leftover = totalPage;
-        rentalState = 1;
-        rentalUser = "";
-        rentalDay = 0;
+        this.leftover = totalPage;
+        this.rentalState = 1;
+        this.rentalUser = "";
+        this.rentalDay = 0;
 
         this.reading = function (page) {
           this.leftover -= page;
@@ -40,6 +40,7 @@
       document.write("저자 : " + book.author + "<br>");
       document.write("장르 : " + book.category + "<br>");
       document.write("가격 : " + book.price + "원 <br>");
+      document.write("총 페이지 수 : " + book.totalPage + "<br>");
       document.write("<hr />");
 
       document.write(
