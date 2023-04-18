@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      //사용자 객체 만들기
+      let book = {
+        // 프로퍼티 생성 및 초기화
+        title: "Justice",
+        author: "Michael J.Sandel",
+        totalPage: 320,
+        category: "philosophy",
+        price: 23400,
+        user: "정지원",
+        day: "2023-04-18",
+
+        // 메소드 작성
+        reading: function (page) {
+          this.totalPage -= page;
+          return this.totalPage;
+        },
+        rental: function (user, day) {
+          return [this.user, this.day];
+        },
+        discount: function (dis) {
+          this.price -= dis;
+          return this.price;
+        },
+      };
+    </script>
+  </head>
+
+  <body>
+    <h3>Quiz7</h3>
+    <hr />
+    <script>
+      document.write("< Book Information > <br>");
+      document.write("책 이름 : " + book.title + ", <br>");
+      document.write("저자 : " + book.author + ", <br>");
+      document.write("총 페이지 : " + book.totalPage + "p, <br>");
+      document.write("카테고리 : " + book.category + ", <br>");
+      document.write("가격 : " + book.price + "원<hr><br>");
+
+      document.write(
+        "100페이지 읽은 후 남은 페이지는 " +
+          book.reading(100) +
+          "페이지<br><br>"
+      );
+
+      document.write("대여자 정보 : " + book.rental() + "<br><br>");
+
+      document.write("10% 할인 후 가격 " + book.discount(2340) + "원");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+  </head>
+
+  <body>
+    <h1>Quiz7</h1>
+    <h3 style="text-align: center">Book Object 실습</h3>
+    <hr />
+    <script>
+      let book = {
+        // <property>
+        title: "오십에 읽는 논어",
+        author: "최종엽",
+        totalPage: 299,
+        category: "철학",
+        price: 16000,
+        rentalUser: "",
+        rentalDay: 0,
+        rentalState: 1,
+        returnDay: 0,
+        remainPage: 0,
+
+        // <method>
+        reading: function (page) {
+          this.remainPage = this.totalPage - page;
+          return this.remainPage;
+        },
+        rental: function (user, day) {
+          if (this.rentalState == 0) {
+            document.write(
+              "현재 " +
+                this.title +
+                " 대여 중인 책이라 대여가 불가능합니다.<br><hr>"
+            );
+            documnet.write("반납일은 : " + this.returnDay);
+          } else {
+            this.rentalUser = user;
+            this.rentalDay = day;
+            this.returnDay = day;
+            this.rentalState = 0;
+          }
+          return;
+        },
+      };
+    </script>
+    <h4>책 객체를 써볼까?</h4>
+    <script>
+      let state = { 0: "대여중", 1: "대여가능" };
+      document.write("제목 : " + book.title + "<br>");
+      document.write("작가 : " + book.author + "<br>");
+      document.write("총 페이지 : " + book.totalPage + "<br>");
+      document.write("카테고리 : " + book.category + "<br>");
+      document.write("가격 : " + book.price + "<br>");
+      document.write("<hr>");
+
+      document.write(
+        "현재 전체 페이지 " +
+          book.totalPage +
+          "page 중 잔여 페이지가 " +
+          book.reading(50) +
+          "페이지 남으셨습니다. <br><hr>"
+      );
+      book.rental("문준현", 30);
+      document.write(
+        "현재 " +
+          book.title +
+          "는 " +
+          book.rentalUser +
+          "님이 " +
+          state[book.rentalState] +
+          " 이고 반납일은 " +
+          book.returnDay +
+          "일 입니다. " +
+          "<br>잔여 페이지는" +
+          book.remainPage +
+          "페이지 입니다.<br><hr>"
+      );
+      book.rental("사공", 20);
+    </script>
+  </body>
+</html>
