@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>리터럴 표기법으로 Book 객체 만들기</title>
+    <script>
+      function Heavy_drink(name, maxdrink, condition, jusa) {
+        this.name = name;
+        this.maxdrink = maxdrink;
+        this.condition = condition;
+        this.jusa = jusa;
+        this.drink = 0;
+        this.die = 0;
+
+        this.info = function () {
+          document.write("정보<br>");
+          document.write(`이 름: ${this.name} <br>`);
+          document.write("주 량: " + this.maxdrink + "<br>");
+          document.write("상 태: " + this.condition + "<br>");
+          document.write("주 사: " + this.jusa + "<br><hr>");
+        };
+
+        this.party = function (hanjan) {
+          if (this.drink + hanjan > this.maxdrink) {
+            this.drink += hanjan;
+            document.write(name + " 취했다 집들어가라 제발......<hr>");
+            this.die = 1;
+          } else if (this.drink + hanjan > maxdrink / 2) {
+            this.drink += hanjan;
+            document.write(
+              name +
+                "을 보니 주사가 " +
+                this.jusa +
+                " 입니다. 곧 취할거 같습니다.<hr>"
+            );
+          } else {
+            this.drink += hanjan;
+            document.write("취할 때 까지 마셔~~~~~~~~~!!!!!!!!!!!!<hr>");
+          }
+        };
+        this.nextday = function () {
+          if (this.die == 1) {
+            document.write("뒤지겠다......<hr>");
+          } else {
+            document.write("해장하러 가자<hr>");
+          }
+        };
+        this.haejang = function (food) {
+          if (this.name == "정희연" || this.name == "서민희") {
+            document.write(food + "는 때려쳐 술로 해장완료~<hr>");
+          } else if (this.die == 1) {
+            document.write("숙취때문에 못먹어요….<hr>");
+          } else {
+            document.write(food + "로 해장완료~<hr>");
+          }
+        };
+      }
+    </script>
+  </head>
+
+  <body>
+    <h3>술병</h3>
+    <hr />
+    <script>
+      let heavy_drink = new Heavy_drink("서민희", 5, "매우좋음", "폭력");
+      heavy_drink.info();
+      heavy_drink.party(2);
+      heavy_drink.party(2);
+      heavy_drink.party(4);
+      heavy_drink.nextday();
+      heavy_drink.haejang("국밥");
+    </script>
+  </body>
+</html>
