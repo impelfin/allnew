@@ -23,7 +23,8 @@
         rental: function (user, day) {
           this.rentalUser = user;
           this.returnDay = day;
-          return rentalState;
+          this.rentalState = 0;
+          return this.rentalState;
         },
       };
     </script>
@@ -53,7 +54,9 @@
       );
       book.rental("임예준", 30);
       let state = { 0: "대여중", 1: "대여가능" };
-      document.write("현재 " + book.title + "은 " + "입니다.");
+      document.write(
+        "현재 " + book.title + "는 " + state[this.rentalState] + "입니다."
+      );
     </script>
   </body>
 </html>
