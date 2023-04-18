@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Date 객체로 경과 시간 알아내기</title>
+  </head>
+  <body>
+    <h3>Date 객체로 경과 시간 알아내기</h3>
+    <hr />
+    <script>
+      let now = new Date(); // 현재 시간 값을 가진 Date 객체 생성
+      document.write("현재 시간 : " + now + "<br><hr />");
+      let oldTime = new Date(2023, 2, 6, 9, 0, 0);
+      document.write("기준 시간 : " + oldTime + "<br><hr />");
+      let diff = now - oldTime;
+      let elapsed_sec = diff / 1000;
+      let elapsed_min = elapsed_sec / 60;
+      let elapsed_hour = elapsed_min / 60;
+      let elapsed_day = elapsed_hour / 24;
+      document.write("경과 시간 - 일 : " + Math.round(elapsed_day) + "<br>");
+      document.write("경과 시간 - 시 : " + Math.round(elapsed_hour) + "<br>");
+      document.write("경과 시간 - 분 : " + Math.round(elapsed_min) + "<br>");
+      document.write("경과 시간 - 초 : " + elapsed_sec + "<br><hr />");
+    </script>
+  </body>
+</html>
