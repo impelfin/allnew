@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Car</title>
+    <script>
+      //프로퍼티 생성
+      function Car(brend, grade, maxFuel, displacement, price) {
+        this.brend = brend;
+        this.grade = grade;
+        this.maxFuel = maxFuel;
+        this.displacement = displacement;
+        this.price = price;
+        this.drivefrom = "";
+        this.driveto = "";
+        this.drivedistance = 0;
+
+        //매소드 생성
+        this.drive = function (from, to, distance) {
+          this.drivefrom = from;
+          this.driveto = to;
+          this.drivedistance = distance;
+          return this.drivedistance;
+        };
+        this.checkfuel = function (amount) {};
+      }
+    </script>
+  </head>
+  <body>
+    <hr />
+    <script>
+      let goodcar = new Car("benz", "suv", 900, 4000, 3000);
+      document.write("Car : " + "<br>");
+      document.write("제조사 : " + goodcar.brend + "<br>");
+      document.write("차종 : " + goodcar.grade + "<br>");
+      document.write("최대주유량 : " + goodcar.maxFuel + "<br>");
+      document.write("배기량 : " + goodcar.displacement + "<br>");
+      document.write("가격 : " + goodcar.price + "원 <br>");
+      document.write("<hr />");
+
+      goodcar.drive("서울", "부산", 350);
+      document.write("현재 주행거리는" + [this.drivedistance] + "입니다.");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <h2>리터럴 표기법으로 Car 객체 만들기</h2>
+    <hr />
+    <script>
+      function Car(brand, grade, maxFuel, displacement, price) {
+        this.brand = brand;
+        this.grade = grade;
+        this.maxFuel = maxFuel;
+        this.leftFuel = maxFuel;
+        this.displacement = displacement;
+        this.price = price;
+        this.totalDistance = 0;
+
+        this.drive = function (from, to, distance) {
+          this.useFuel = distance * 0.3;
+          document.write(
+            `${from} 부터 ${to}까지의 거리는 ${distance}km입니다. 도착했습니다. <br>`
+          );
+          this.leftFuel -= this.useFuel;
+          this.totalDistance += distance;
+          document.write(
+            `연료를 ${this.useFuel}만큼 사용하여 총 ${this.leftFuel}만큼의 연료가 남았습니다. ${this.totalDistance}km 주행완료.<br>`
+          );
+          if (this.leftFuel < 0) {
+            document.write("주유하세요.<br>");
+          }
+        };
+
+        this.refueling = function (amount) {
+          if (this.leftFuel == this.maxFuel) {
+            document.write("Full!!<br>");
+          } else {
+            this.leftFuel += amount;
+            document.write(
+              `${amount}L 충전 완료. 남은 연료는 ${this.leftFuel}L 입니다.<br>`
+            );
+          }
+        };
+
+        this.info = function () {
+          document.write(`
+            brand : ${this.brand}<br>
+            grade : ${this.grade}<br>
+            maxfuel : ${this.maxFuel}<br>
+            displacement : ${this.displacement}<br>
+            price : ${this.price}<br><hr>`);
+        };
+      }
+    </script>
+  </head>
+  <body>
+    <script>
+      let benz = new Car("Benz", "suv", 900, 4000, 3000);
+      benz.info();
+      benz.drive("Seoul", "Busan", 400);
+      benz.drive("Busan", "Seoul", 460);
+      benz.refueling(860);
+
+      let bmw = new Car("BMW", "sedan", 500, 2500, 2000);
+      bmw.info();
+      bmw.drive("Seoul", "Daejeon", 310);
+      bmw.refueling(200);
+      bmw.drive("Dajeon", "Seoul", 300);
+    </script>
+  </body>
+</html>
