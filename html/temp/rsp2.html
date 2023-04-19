@@ -5,10 +5,10 @@
     <title>가위 바위 보 게임 II</title>
     <script>
       function rspGame() {
-        let user = document.getElementsByName(rsp);
+        let user = document.getElementsByName("rsp");
         let com = Math.floor(Math.random() * 3 + 1);
-        let verdict = user - com;
-        alert("verdict");
+        let verdict = Number(user) - com;
+        alert(verdict);
         // var rsp_T = { 1: "가위", 2: "바위", 3: "보" };
         // let text =
         //   "User : " + rsp_T[user] + " vs  Com : " + rsp - T[com] + "<br>";
