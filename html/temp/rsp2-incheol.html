@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>가위바위보</title>
+  </head>
+
+  <body>
+    <div style="position: absolute; width: 100%">
+      <h5 style="text-align: center">가위 바위 보</h5>
+
+      <div
+        style="
+          text-align: center;
+          border: 3px solid black;
+          width: 60%;
+          position: relative;
+          top: 30%;
+          bottom: 30%;
+          left: 20%;
+          padding: 40px auto;
+        "
+      >
+        <div style="position: relative; top: 40%">
+          <input type="radio" name="choice" value="가위" />가위
+          <input
+            type="radio"
+            name="choice"
+            value="주먹"
+            checked="checked"
+          />바위 <input type="radio" name="choice" value="보자기" />보
+
+          <br />
+          <br />
+          <button onclick="play()">Play</button>
+          <button onclick="reset()">reset</button>
+        </div>
+      </div>
+
+      <h1 id="result" style="text-align: center"></h1>
+    </div>
+    <script>
+      function play() {
+        const choices = document.getElementsByName("choice");
+        let userChoice;
+        for (let i = 0; i < choices.length; i++) {
+          if (choices[i].checked) {
+            userChoice = choices[i].value;
+            break;
+          }
+        }
+
+        const computerChoice = ["주먹", "보자기", "가위"][
+          Math.floor(Math.random() * 3)
+        ];
+
+        let result;
+        if (userChoice === computerChoice) {
+          result = "비김 ㅋ 리겜 ? ";
+        } else if (
+          (userChoice === "가위" && computerChoice === "보자기") ||
+          (userChoice === "주먹" && computerChoice === "가위") ||
+          (userChoice === "보자기" && computerChoice === "주먹")
+        ) {
+          result = `니가이김 ㅋㅋ! 한번 봐줬다 ㅋㅋ `;
+        } else {
+          result = `내가이김 ㅋㅋ! <br> 컴밑인 ~ `;
+        }
+
+        document.getElementById(
+          "result"
+        ).innerHTML = `너는 ${userChoice}을(를) 선택했고, 나는 ${computerChoice}을(를) 선택했습니다.
+                <br> ${result}`;
+      }
+      function reset() {
+        location.reload();
+      }
+    </script>
+  </body>
+</html>
