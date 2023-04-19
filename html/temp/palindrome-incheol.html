@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>회문 문자열 판별기</title>
+  </head>
+  <body>
+    <h1>Palindrome</h1>
+    <label for="input">세 글자를 입력하세요:</label>
+    <br />
+    <input type="text" id="input" name="input" value="토마토" />
+    <button onclick="check()">확인</button>
+    <p id="result"></p>
+    <script>
+      function check() {
+        var str = document.getElementById("input").value;
+        var len = str.length;
+        if (len == 3) {
+          for (var i = 0; i < len / 2; i++) {
+            if (str[i] !== str[len - 1 - i]) {
+              document.getElementById("result").innerHTML =
+                "입력한 문자열은 Palindrome이 아닙니다.";
+              return;
+            }
+          }
+          document.getElementById("result").innerHTML =
+            "입력한 문자열은 Palindrome입니다!";
+        } else
+          document.getElementById("result").innerHTML =
+            "세글자만 입력하세요 ~!";
+      }
+    </script>
+  </body>
+</html>
