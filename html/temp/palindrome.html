@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>Palindrome</title>
     <script>
-      function isPalindrome() {
+      function checkPalindrome() {
         let tora_v = document.getElementsByName("tora");
         if (tora_v == "1") nora = 1;
         else nora = 2;
@@ -26,7 +26,11 @@
     <hr />
     <form>
       <input type=""text" name="input" placeholder="숫자/문자 3글자">
-      <input type="button" value="Check Palindrome" onclick="isPalindrome()" />
+      <input
+        type="button"
+        value="Check Palindrome"
+        onclick="checkPalindrome()"
+      />
       <p>
         <input type="radio" name="tora" value="1" checked />숫자
         <input type="radio" name="tora" value="2" />문자
