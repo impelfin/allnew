@@ -4,20 +4,32 @@
     <meta charset="UTF-8" />
     <title>Palindrome</title>
     <script>
-      function check1() {
-        let tora_v = document.getElementsByName("tora");
-        if (tora_v == "1") nora = 1;
-        else nora = 2;
-        if (nora == 1) {
-          let input_v = document.getElementsByName("input");
-          input1 = input_v / 100;
-          input2 = (input_v / 10) % 10;
-          input3 = input_v % 10;
-          let output_v = document.getElementsById("output");
-          if (input1 == input3)  {
-          output_v.innerHTML = "입력하신 숫자 "+ input_v + "는 팰린드롬입니다."
-        } else
-        output_v.innerHTML = "입력하신 숫자 "+ input_v + "는 팰린드롬이 아닙니다."
+      let isNum = 0;
+      let result = 1;
+      function checkPalindrome() {
+        let ta_v = document.getElementsByName("ta");
+        for (let i = 0; i < ta_v.length; i++) {
+          if (ta_v[i].checked == true) {
+            isNum = i;
+          }
+        }
+        let input_v = document.getElementById("input").value;
+        let output_v = document.getElementById("output");
+        if (!isNum) {
+          let num = Number(input_v);
+          let input1 = Math.floor(num / 100);
+          let input2 = Math.floor((num / 10) % 10);
+          let input3 = Math.floor(num % 10);
+          if (input1 == input3) result = 1;
+          else result = 0;
+        } else {
+          let char = input_v.split("");
+          if (char[0] == char[2]) result = 1;
+          else result = 0;
+        }
+        if (result == 1)
+          output_v.innerHTML = "입력하신 숫자/문자는 Palindrome입니다.";
+        else output_v.innerHTML = "입력하신 숫자/문자는 Palindrome이 아닙니다.";
       }
     </script>
   </head>
@@ -25,11 +37,15 @@
     <h3>Palindrome</h3>
     <hr />
     <form>
-      <input type=""text" name="input" placeholder="숫자/문자 3글자">
-      <input type="button" value="Check Palindrome" onclick="check1()" />
+      <input type="text" id="input" placeholder="숫자/문자 3글자" />
+      <input
+        type="button"
+        value="Check Palindrome"
+        onclick="checkPalindrome()"
+      />
       <p>
-        <input type="radio" name="tora" value="1" checked />숫자
-        <input type="radio" name="tora" value="2" />문자
+        <input type="radio" name="ta" value="0" checked />숫자
+        <input type="radio" name="ta" value="1" />문자
       </p>
     </form>
     <div sytle="margin=100">
