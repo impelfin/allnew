@@ -15,7 +15,7 @@
           : decodeURIComponent(results[1].replace(/\+/g, " "));
       }
 
-      function sessionStore() {
+      function login() {
         id = getParameter("id");
         now = new Date();
 
@@ -39,12 +39,15 @@
       }
     </script>
   </head>
-  <body onload="sessionStore()" onunload="logout()">
-    <h3 id="username">User Home</h3>
+  <body onload="login()" onunload="logout()">
+    <div>
+      <span><h2 id="username">User Home</h2></span>
+    </div>
+    <div style="text-align: right">
+      <span><a href="index.html">logout</a></span>
+    </div>
     <hr />
-    <form>
-      <a href="index.html">Home</a>
-    </form>
+    <h2>User's main Page</h2>
     <hr />
   </body>
 </html>
