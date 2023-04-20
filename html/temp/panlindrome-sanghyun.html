@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>palindrome</title>
+    <script>
+      function findChecked() {
+        let Input = document.getElementById("userInput").value; // 텍스트 출력 userInput 값을 다 가져옴(값은 객체)
+        let Language = document.getElementsByName("language"); // 타입 선언  (배열) name이 language인 요소를 가져옴
+
+        let mycked = 0; //라디오 버튼의 인덱스를 나타냄, 값이 1이면 문자열, 값이 2이면 숫자
+        let num = 0;
+        let str = "";
+
+        for (let i = 1; i <= Language.length; i++) {
+          //Language배열의 길이보다 작을때 까지 반복
+          if (Language[i].checked == true) {
+            //라디오 버튼이 선택되었으면
+            mycked = i;
+          }
+        }
+
+        if (parseInt(Input) > 0) {
+          //input값을 정수형태로 바꿈
+          num = parseInt(Input);
+        } else {
+          str = Input; //문자열이 들어감()
+        }
+
+        //문자열 펠린드롬을 가리기 위한 코드
+        if (str.length > 1 && mycked == 1) {
+          //mycked가 1이면 문자
+          if (str[0] == str[2]) {
+            //배열에 토 | 마 | 토 가 들어가서 하나의 string으로 구성되어 있음음
+            alert("문자 펠린드롬 입니다.");
+          } else {
+            alert("문자 펠린드롬이 아닙니다.");
+          }
+        } else if (num > 0 && mycked == 2) {
+          // mycked가 2이면 숫자
+          if (num % 10 == ((num % 1000) - (num % 100)) / 100) {
+            //마지막 자리수가 첫번째 자리수 나머지 - 두번쨰 자리수
+            alert("슷자 펠린드롬 입니다.");
+          } else {
+            alert("숫자 펠린드롬이 아닙니다.");
+          }
+        } else {
+          alert("문자 입력칸에 숫자를, 숫자입력칸에 문자를 넣으셨습니다.");
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h3>Palindrome? Or Not?</h3>
+    <form>
+      <input type="text" id="userInput" />
+      <input type="radio" name="language" value="1" />문자
+      <input type="radio" name="language" value="2" />숫자
+      <input type="button" value="find checked" onclick="findChecked()" />
+    </form>
+  </body>
+</html>
