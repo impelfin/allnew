@@ -8,6 +8,7 @@
         let input_v = document.getElementById("input").value;
         let p = document.getElementById("output");
         p.innerHTML = input_v;
+        console.log(input_v);
       }
     </script>
   </head>
@@ -15,7 +16,7 @@
     <h3>innerHTML 활용</h3>
     <hr />
     <form>
-      <input type="text" id="input" />&nbsp;&nbsp;
+      <input type="text" id="input" onkeyup="Click()" />&nbsp;&nbsp;
       <input type="button" value="Click" onclick="Click()" />
     </form>
     <hr />
