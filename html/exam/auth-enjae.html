@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Palindrome</title>
+    <script>
+    function getParameter(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+        return results === null
+            ? ""
+            : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+    function sessionStore() {
+        let id = getParameter("id");
+        let now = new Date();
+        if (!window.sessionStorage) {
+            alert("세션 스토리지를 지원하지 않습니다.");
+            return;
+        } else if (id in sessionStorage) {
+            return;
+        } else if (!id) {
+                alert("잘못된 접근입니다.");
+                location.href = "/index.html";
+        } else{
+            sessionStorage.setItem(id, now);
+        alert(`${id} 님이 로그인하셨습니다.`);}
+        
+    }
+    function remove() {
+        let con = confirm("로그아웃하시겠습니까?");
+        if (con == true) {
+            location.href = "/index.html";
+            let id = getParameter("id");
+            sessionStorage.removeItem(id);
+            alert(`사용자 ${id} 세션 스토리지 삭제`);
+        }
+    };
+</script>
+
+<body onload="sessionStore()">
+</html>

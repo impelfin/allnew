@@ -16,15 +16,29 @@
           : decodeURIComponent(results[1].replace(/\+/g, " "));
       }
 
-      function sessionStore() {
-        id = getParameter("id");
-        now = new Date();
+      id = getParameter("id");
+      now = new Date();
+
+      function login() {
         if (!window.sessionStorage) {
           alert("세션 스토리지를 지원하지 않습니다.");
           return;
+        } else {
+          if (id == "") {
+            alert("잘못된 접근 방식입니다!!");
+            sessionStorage.removeItem("");
+            location.href = "index.html";
+          } else {
+            for (var i = 0; i < sessionStorage.key.length; i++) {
+              if (id == sessionStorage.key(i)) {
+                sessionStorage.setItem(id, now);
+                return;
+              }
+              sessionStorage.setItem(id, now);
+              alert(`관리자 ${id} 님이 로그인 하셨습니다.`);
+            }
+          }
         }
-        sessionStorage.setItem(id, now);
-        alert(`관리자 - ${id}님이 로그인 하셨습니다.`);
       }
 
       window.addEventListener("beforeunload", (event) => {
@@ -37,7 +51,7 @@
       }
     </script>
   </head>
-  <body onload="sessionStore()" onunload="logout()">
+  <body onload="login()" onunload="logout()">
     <h3>User Authentication</h3>
     <div style="text-align: right">
       <a href="index.html">logout</a>
