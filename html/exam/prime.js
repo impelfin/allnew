@@ -8,6 +8,7 @@ onmessage = function (e) {
 		else
 			i++;
 	}
-	output = (input == i) ? "Prime Number" : "not Prime Number";
+	output = input
+	output += (input == i) ? " is Prime Number." : " is not Prime Number.";
 	postMessage(output);
 }
