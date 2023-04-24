@@ -1,7 +1,5 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const CircularJSON = require('circular-json')
-const request = require('request')
 const mysql = require("sync-mysql")
 const env = require("dotenv").config({ path: "../../.env" });
 
@@ -71,11 +69,7 @@ app.get("/insert", (req, res) => {
         DEPT
     ]);
 
-    urls = "http://192.168.1.200:8000/select/"
-    request(urls, { json: true }, (err, result, body) => {
-        if (err) { return console.log(err) }
-        res.send(CircularJSON.stringify(body))
-    })
+    res.redirect('/select');
 })
 
 // update row from st_info table
@@ -87,11 +81,7 @@ app.get("/update", (req, res) => {
         ST_ID
     ]);
 
-    urls = "http://192.168.1.200:8000/select/"
-    request(urls, { json: true }, (err, result, body) => {
-        if (err) { return console.log(err) }
-        res.send(CircularJSON.stringify(body))
-    })
+    res.redirect('/select');
 })
 
 // delete row from st_info table
@@ -101,11 +91,7 @@ app.get("/delete", (req, res) => {
         ST_ID
     ]);
 
-    urls = "http://192.168.1.200:8000/select/"
-    request(urls, { json: true }, (err, result, body) => {
-        if (err) { return console.log(err) }
-        res.send(CircularJSON.stringify(body))
-    })
+    res.redirect('/select');
 })
 
 module.exports = app;

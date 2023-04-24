@@ -1,7 +1,5 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const CircularJSON = require('circular-json')
-const request = require('request')
 const app = express()
 const pool = require("../../config/pool");
 
@@ -61,11 +59,7 @@ app.get("/insert", async (req, res) => {
         DEPT
     ]);
 
-    urls = "http://192.168.1.200:8000/select/"
-    request(urls, { json: true }, (err, result, body) => {
-        if (err) { return console.log(err) }
-        res.send(CircularJSON.stringify(body))
-    })
+    res.redirect('/select');
 })
 
 // update row from st_info table
@@ -77,11 +71,7 @@ app.get("/update", async (req, res) => {
         ST_ID
     ]);
 
-    urls = "http://192.168.1.200:8000/select/"
-    request(urls, { json: true }, (err, result, body) => {
-        if (err) { return console.log(err) }
-        res.send(CircularJSON.stringify(body))
-    })
+    res.redirect('/select');
 })
 
 // delete row from st_info table
@@ -91,11 +81,7 @@ app.get("/delete", async (req, res) => {
         ST_ID
     ]);
 
-    urls = "http://192.168.1.200:8000/select/"
-    request(urls, { json: true }, (err, result, body) => {
-        if (err) { return console.log(err) }
-        res.send(CircularJSON.stringify(body))
-    })
+    res.redirect('/select');
 })
 
 module.exports = app;
