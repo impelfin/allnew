@@ -28,6 +28,7 @@ node/config/pool.js
 ## python
 python/**/.venv
 python/**/__pycache__/
+python/**/.idea
 
 ## mongodb
 mongodb/*.json
