@@ -14,4 +14,8 @@ t = threading.Thread(target=getHtml, args=('http://google.com',))
 t.daemon = True
 t.start()
 
-print('### End ###')
+while True:
+    for _ in range(5):
+        time.sleep(1)
+    print('### End ###')
+    break
