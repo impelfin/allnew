@@ -28,7 +28,7 @@ class ChickenStore():
             if self.brandName != 'pelicana':
                 return BeautifulSoup(self.soup, 'html.parser')
             else:
-                return BeautifulSoup(self.soup, 'html.parser')
+                return BeautifulSoup(self.soup, 'html.parser', from_encoding='utf-8')
 
     def get_request_url(self):
         request = urllib.request.Request(self.url)
