@@ -6,7 +6,8 @@ from wordcloud import WordCloud
 from PIL import Image
 from konlpy.tag import Komoran
 
-plt.rc('font', family="AppleGothic")
+# plt.rc('font', family="AppleGothic")
+plt.rcParams["font.family"] = 'AppleGothic'
 
 class Visualization:
     def __init__(self, wordList):
