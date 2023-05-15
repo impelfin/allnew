@@ -7,7 +7,7 @@ from PIL import Image
 from konlpy.tag import Komoran
 
 # plt.rc('font', family="AppleGothic")
-plt.rcParams["font.family"] = 'Nanum Pen Script'
+plt.rcParams["font.family"] = 'AppleGothic'
 
 class Visualization:
     def __init__(self, wordList):
@@ -18,7 +18,7 @@ class Visualization:
         alice_color_file = 'alice_color.png'
         alice_coloring = np.array(Image.open(alice_color_file))
 
-        fontpath = "Nanum Pen Script.ttf"
+        fontpath = "AppleGothic.ttf"
         wordcloud = WordCloud(font_path=fontpath, mask=alice_coloring, relative_scaling=0.2, background_color='lightyellow')
         print(self.wordList)
         wordcloud = wordcloud.generate_from_frequencies(self.wordDict)
