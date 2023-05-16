@@ -10,5 +10,5 @@ create table myterror(
 	provstate varchar2(255),
 	city varchar2(255),
 	latitude number,
-	longitude number,
+	longitude number
 );
