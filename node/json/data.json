@@ -1,7 +1,8 @@
 {
   "users": [
     {
-      "id": "1"
+      "id": "1",
+      "name": "Moon"
     },
     {
       "userID": 1,
@@ -23,28 +24,6 @@
       "lastname": "react",
       "phonenumber": "2468",
       "email": "ccc.test.com"
-    },
-    {
-      "userID": 4,
-      "firstname": "DDD",
-      "lastname": "java",
-      "phonenumber": "97531",
-      "email": "ddd.test.com"
-    },
-    {
-      "title": "JavaScript",
-      "author": "John Doe",
-      "id": "Udya_QF"
-    },
-    {
-      "title": "JavaScript",
-      "author": "John Doe",
-      "id": "yJ6pwyx"
-    },
-    {
-      "title": "JavaScript",
-      "author": "John Doe",
-      "id": "5SkOZIZ"
     }
   ]
 }

@@ -31,12 +31,11 @@ app.get('/getPostData', (req, res) => {
     }
 })
 
-app.get('/PostData', (req, res) => {
+app.post('/PostData', (req, res) => {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "http://localhost:5000/users");
     xhr.setRequestHeader("content-type", "application/json; charset=UTF-8")
-
-    const data = { title: 'JavaScript', author: 'John Doe' };
+    const data = { id: req.body.id, name: req.body.name };
     xhr.send(JSON.stringify(data));
 
     xhr.onload = () => {
@@ -50,11 +49,11 @@ app.get('/PostData', (req, res) => {
     }
 })
 
-app.get('/addData', (req, res) => {
+app.post('/putData', (req, res) => {
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://localhost:5000/users");
+    xhr.open("PUT", "http://localhost:5000/users/" + req.body.id);
     xhr.setRequestHeader("content-type", "application/json; charset=UTF-8");
-    const data = { id: 2 };
+    const data = { id: req.body.id, name: req.body.name };
     xhr.send(JSON.stringify(data));
 
     xhr.onload = () => {
@@ -68,28 +67,10 @@ app.get('/addData', (req, res) => {
     }
 })
 
-app.get('/putData', (req, res) => {
-    const xhr = new XMLHttpRequest();
-    xhr.open("PUT", "http://localhost:5000/users/2");
-    xhr.setRequestHeader("content-type", "application/json; charset=UTF-8");
-    const data = { title: "HTML", author: "Heung Min SON" };
-    xhr.send(JSON.stringify(data));
-
-    xhr.onload = () => {
-        if (xhr.status === 200) {
-            const res = JSON.parse(xhr.response);
-            console.log(res);
-        } else {
-            console.log(xhr.status, xhr.statusText);
-        }
-        res.send(xhr.response)
-    }
-})
-
-app.get('/deleteData', (req, res) => {
+app.post('/deleteData', (req, res) => {
     const xhr = new XMLHttpRequest();
 
-    xhr.open("DELETE", "http://localhost:5000/users/2");
+    xhr.open("DELETE", "http://localhost:5000/users/" + req.body.id);
     xhr.getResponseHeader("content-type", "application/json; charset=UTF-8")
     xhr.send();
 

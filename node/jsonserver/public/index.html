@@ -2,9 +2,31 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>JSON Server</title>
+    <title>JSON Server - CRUD</title>
   </head>
   <body>
-    <h3>JSON Server</h3>
+    <h3>JSON Server - CRUD</h3>
+    <form action="PostData" method="post" target="targetURL" name="userForm">
+      <hr />
+      <input
+        type="button"
+        value="getPostData"
+        onclick='document.targetURL.location.href="/getPostData"'
+      />
+      <hr />
+      <p>id : <input type="text" size="15" name="id" /></p>
+      <p>name : <input type="text" size="15" name="name" /></p>
+      <input type="submit" value="PostData" /> &nbsp;&nbsp;
+      <button type="submit" formaction="/putData">putData</button>&nbsp;&nbsp;
+      <button type="submit" formaction="/deleteData">deleteData</button>
+    </form>
+    <hr />
+    <iframe
+      name="targetURL"
+      width="70%"
+      height="500"
+      style="border: none"
+      src="/hello"
+    ></iframe>
   </body>
 </html>
