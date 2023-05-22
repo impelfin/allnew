@@ -17,8 +17,9 @@ async def hello_with_name(name:str):
 
 @app.get(path='/hello/query')
 async def hello_with_querystring(name:str):
+    print(name)
     return "Hello with name. your name is " + name
-    
+
 @app.post(path='/hello/post')
 async def hello_post(request: HelloWorldRequest):
     return "Hello with post. your name is {}, your age is {}".format(request.name, request.age)
