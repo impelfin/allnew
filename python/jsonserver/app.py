@@ -22,8 +22,8 @@ async def postUsers(id:str, name:str):
     response = requests.post(base_url, json=data)
     return response.json()
 
-@app.get(path='/getdata')
-async def getData(id=None, name=None):
+@app.get(path='/users/params')
+async def user_params(id=None, name=None):
     if (id is None) and (name is None):
         return "id, name을 입력하세요."
     else:
@@ -38,13 +38,27 @@ async def getData(id=None, name=None):
     response = requests.get(url)
     return response.json()
 
+@app.get(path='/users/data')
+async def users_data(id=None, name=None):
+    if (id is None) and (name is None):
+        return "id, name을 입력하세요."
+    else:
+        if id is None:
+            data = dict(name=name)
+        elif name is None:
+            data = dict(id=id)
+        else:
+            data = dict(id=id, name=name)
+    response = requests.get(base_url, data)
+    return response.json()
+
 @app.get(path='/users/{id}')
 async def users_data(id=None):
     if id is None:
         return "id를 입력하세요."
     else:
-        data = dict(id=id)
-    response = requests.get(base_url, data)
+        url = base_url + '/' + id
+    response = requests.get(url)
     return response.json()
 
 @app.put(path='/put/{id}')
