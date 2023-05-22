@@ -13,7 +13,7 @@ app.get('/hello', (req, res) => {
     res.send('hello world~!!')
 })
 
-app.get('/getPostData', (req, res) => {
+app.get('/getData', (req, res) => {
     const xhr = new XMLHttpRequest();
 
     xhr.open("GET", "http://localhost:5000/users");
@@ -31,7 +31,7 @@ app.get('/getPostData', (req, res) => {
     }
 })
 
-app.post('/PostData', (req, res) => {
+app.post('/postData', (req, res) => {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "http://localhost:5000/users");
     xhr.setRequestHeader("content-type", "application/json; charset=UTF-8")
