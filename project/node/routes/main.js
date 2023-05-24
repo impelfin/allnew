@@ -22,6 +22,12 @@ app.get('/hello', (req, res) => {
     res.send('Hello World~!!')
 })
 
+app.get('/select', (req, res) => {
+    const result = connection.query('select * from user');
+    console.log(result);
+    res.send(result);
+})
+
 app.get('/randomUUID', (req, res) => {
     axios
         .get('http://192.168.1.12:3000/randomUUID')
