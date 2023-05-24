@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Project</title>
+    <script>
+      function getHello() {
+        const xhr = new XMLHttpRequest();
+        const method = "GET";
+        const url = "/hello";
+        xhr.open(method, url);
+        xhr.send();
+
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState !== 4) return;
+
+          if (xhr.status === 200) {
+            console.log(xhr.responseText);
+            const element = document.getElementById("ss1");
+            element.innerHTML = xhr.responseText;
+          } else {
+            console.log("HTTP error", xhr.status, xhr.statusText);
+          }
+        };
+      }
+
+      function getSelect() {
+        const xhr = new XMLHttpRequest();
+        const method = "GET";
+        const url = "/select";
+        xhr.open(method, url);
+        xhr.setRequestHeader("content-type", "application/json");
+        xhr.send();
+
+        xhr.onload = () => {
+          if (xhr.status === 200) {
+            const res = JSON.parse(xhr.response);
+            console.log(res);
+            const element = document.getElementById("ss2");
+            element.innerHTML = JSON.stringify(res);
+          } else {
+            console.log("HTTP error", xhr.status, xhr.statusText);
+          }
+        };
+      }
+
+      function getRandom() {
+        const xhr = new XMLHttpRequest();
+        const method = "GET";
+        const url = "/select";
+        xhr.open(method, url);
+        xhr.setRequestHeader("content-type", "application/json");
+        xhr.send();
+
+        xhr.onload = () => {
+          if (xhr.status === 200) {
+            const res = JSON.parse(xhr.response);
+            console.log(res);
+            const element = document.getElementById("ss2");
+            element.innerHTML = JSON.stringify(res);
+          } else {
+            console.log("HTTP error", xhr.status, xhr.statusText);
+          }
+        };
+      }
+
+      function getUsers() {
+        const element = document.getElementById("ss3");
+        fetch("http://192.168.1.12:5000/users").then((response) => {
+          console.log(response);
+          element.innerHTML = JSON.stringify(response);
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <h3>Project</h3>
+    <hr />
+    <form>
+      <input
+        type="button"
+        value="node Hello"
+        onclick='document.targetURL.location.href="http://192.168.1.12:8000/hello"'
+      />
+      <hr />
+      <input
+        type="button"
+        value="Python HealthCheck"
+        onclick='document.targetURL.location.href="http://192.168.1.12:3000/"'
+      />
+      <hr />
+      <input
+        type="button"
+        value="Python randomUUID"
+        onclick='document.targetURL.location.href="http://192.168.1.12:3000/randomUUID"'
+      />
+      <hr />
+      <input
+        type="button"
+        value="JSON-Server users"
+        onclick='document.targetURL.location.href="http://192.168.1.12:5000/users"'
+      />
+      <hr />
+      <iframe
+        name="targetURL"
+        width="500"
+        height="200"
+        style="border: none"
+        src="/hello"
+      ></iframe>
+      <hr />
+      <hr />
+      <input type="button" value="Node Hello" onclick="getHello()" />
+      <div id="section1">
+        <h3>Node Hello</h3>
+        <span id="ss1"></span>
+      </div>
+      <hr />
+      <input type="button" value="Node Select" onclick="getSelect()" />
+      <div id="section2">
+        <h3>Node Select</h3>
+        <span id="ss2"></span>
+      </div>
+      <hr />
+      <input type="button" value="Python randomUUID" onclick="getRandom()" />
+      <div id="section2">
+        <h3>Python randomUUID</h3>
+        <span id="ss3"></span>
+      </div>
+      <hr />
+      <input type="button" value="JSON-Server Users" onclick="getUsers()" />
+      <div id="section3">
+        <h3>Json-server users</h3>
+        <span id="ss4"></span>
+      </div>
+    </form>
+    <hr />
+  </body>
+</html>

@@ -41,3 +41,7 @@ mongodb/backup
 oracle/node/dbConfig.js
 oracle/node/node_modules
 oracle/node/package-lock.json
+
+## project
+project/node/node_modules
+project/python/__pycache__

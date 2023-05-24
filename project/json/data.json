@@ -1,0 +1,29 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Moon"
+    },
+    {
+      "userID": 1,
+      "firstname": "AAA",
+      "lastname": "node",
+      "phonenumber": "1234",
+      "email": "aaaa.test.com"
+    },
+    {
+      "userID": 2,
+      "firstname": "BBB",
+      "lastname": "python",
+      "phonenumber": "1357",
+      "email": "bbb.test.com"
+    },
+    {
+      "userID": 3,
+      "firstname": "CCC",
+      "lastname": "react",
+      "phonenumber": "2468",
+      "email": "ccc.test.com"
+    }
+  ]
+}
