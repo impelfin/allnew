@@ -48,7 +48,6 @@ app.get('/users', (req, res) => {
         })
 })
 
-
 // request O, query X
 app.get('/select', (req, res) => {
     const result = connection.query('select * from user');
