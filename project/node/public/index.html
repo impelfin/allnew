@@ -47,7 +47,27 @@
       function getRandom() {
         const xhr = new XMLHttpRequest();
         const method = "GET";
-        const url = "/select";
+        const url = "/randomUUID";
+        xhr.open(method, url);
+        xhr.send();
+
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState !== 4) return;
+
+          if (xhr.status === 200) {
+            console.log(xhr.responseText);
+            const element = document.getElementById("ss3");
+            element.innerHTML = xhr.responseText;
+          } else {
+            console.log("HTTP error", xhr.status, xhr.statusText);
+          }
+        };
+      }
+
+      function getUsers() {
+        const xhr = new XMLHttpRequest();
+        const method = "GET";
+        const url = "/users";
         xhr.open(method, url);
         xhr.setRequestHeader("content-type", "application/json");
         xhr.send();
@@ -56,20 +76,12 @@
           if (xhr.status === 200) {
             const res = JSON.parse(xhr.response);
             console.log(res);
-            const element = document.getElementById("ss2");
+            const element = document.getElementById("ss4");
             element.innerHTML = JSON.stringify(res);
           } else {
             console.log("HTTP error", xhr.status, xhr.statusText);
           }
         };
-      }
-
-      function getUsers() {
-        const element = document.getElementById("ss3");
-        fetch("http://192.168.1.12:5000/users").then((response) => {
-          console.log(response);
-          element.innerHTML = JSON.stringify(response);
-        });
       }
     </script>
   </head>
