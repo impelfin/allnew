@@ -1,0 +1,22 @@
+url = AAA
+html = urllib.request.urlopen(url)
+soup = BeautifulSoup(html, 'html.parser')
+
+infos = soup.findAll('div', attrs={'class':'thumb_cont'})
+no = 0
+result = []
+for info in infos:
+    no += 1
+    mytitle = info.find('a', attrs={'class':'link_txt'})
+    title = mytitle.string
+
+    mygrade = info.find('span', attrs={'class':'txt_grade'})
+    grade = mygrade.string
+
+    mynum = info.find('span', attrs={'class':'txt_num'})
+    num = mynum.string
+
+    myrelease = info.find('span', attrs={'class':'txt_info'})
+    release = myrelease.span.string
+
+    result.append((no, title, grade, num, release))
