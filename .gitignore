@@ -3,6 +3,7 @@
 
 # environment files
 .env
+**/.env
 
 ## c programing
 c/**/a.out
