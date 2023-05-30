@@ -48,7 +48,7 @@ app.get('/randomNum', (req, res) => {
         .then(response => {
             console.log(`statusCode : ${response.status}`)
             console.log(response.data)
-            res.send({ result: response.data })
+            res.send({ random: response.data })
         })
         .catch(error => {
             console.log(error)

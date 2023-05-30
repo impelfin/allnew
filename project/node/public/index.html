@@ -78,7 +78,7 @@
             const res = JSON.parse(xhr.response);
             console.log(res);
             const element = document.getElementById("ss4");
-            element.innerHTML = JSON.stringify(res);
+            element.innerHTML = JSON.stringify(res['random']);
           } else {
             console.log("HTTP error", xhr.status, xhr.statusText);
           }
