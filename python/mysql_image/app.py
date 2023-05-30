@@ -6,11 +6,14 @@ from io import BytesIO
 from typing import List
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
 import uvicorn
 import os.path
 import json
 
 app = FastAPI()
+
+app.mount("/images", StaticFiles(directory="./images"), name='images')
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.relpath("./")))
 secret_file = os.path.join(BASE_DIR, '../secret.json')
@@ -44,6 +47,7 @@ def InsertImageDB(filename):
         binary_image = binary_image.decode('UTF-8')
         img_df = pd.DataFrame({'filename':filename,'image_data':[binary_image]})
         img_df.to_sql('images', con=engine, if_exists='append', index=False)
+    os.chdir('../')
     return f'Image file : {filename} Inserted~!!'
 
 def SelectImageDB():
@@ -84,7 +88,7 @@ async def main():
             function showImage() {
                 const inputVal = document.getElementById("imageName").value;
                 const element = document.getElementById("ss2");
-                tag = '<img src="./images/"'+ inputVal +'">"'
+                const tag = '<img src="/images/' + inputVal +  '">';
                 element.innerHTML = tag;
             }
         </script>
