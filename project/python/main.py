@@ -27,3 +27,15 @@ async def random_uuid():
     id = uuid.uuid4()
     print(id)
     return id
+
+@app.get('/randomNum')
+async def random(max=None):
+    import random
+    
+    if max is None:
+        max = 10
+    else:
+        max = int(max)
+    random_v = random.randint(1, max)
+
+    return random_v

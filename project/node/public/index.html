@@ -44,7 +44,7 @@
         };
       }
 
-      function getRandom() {
+      function getRandomUUID() {
         const xhr = new XMLHttpRequest();
         const method = "GET";
         const url = "/randomUUID";
@@ -64,12 +64,13 @@
         };
       }
 
-      function getUsers() {
+      function getRandomNum() {
         const xhr = new XMLHttpRequest();
         const method = "GET";
-        const url = "/users";
+        var url = "/randomNum";
+        const inputVal = document.getElementById("input_max").value;
+        url += "?max=" + inputVal
         xhr.open(method, url);
-        xhr.setRequestHeader("content-type", "application/json");
         xhr.send();
 
         xhr.onload = () => {
@@ -83,33 +84,60 @@
           }
         };
       }
+
+      function getUsers() {
+        const xhr = new XMLHttpRequest();
+        const method = "GET";
+        const url = "/users";
+        xhr.open(method, url);
+        xhr.setRequestHeader("content-type", "application/json");
+        xhr.send();
+
+        xhr.onload = () => {
+          if (xhr.status === 200) {
+            const res = JSON.parse(xhr.response);
+            console.log(res);
+            const element = document.getElementById("ss5");
+            element.innerHTML = JSON.stringify(res);
+          } else {
+            console.log("HTTP error", xhr.status, xhr.statusText);
+          }
+        };
+      }
     </script>
   </head>
   <body>
     <h3>Project</h3>
     <hr />
-      <input type="button" value="Node Hello" onclick="getHello()" />
-      <div id="section1">
-        <h3>Node Hello</h3>
+    <h3>Node Hello</h3>
+    <input type="button" value="Node Hello" onclick="getHello()" />
+      <div id="section1" style="margin-top: 20px;">
         <span id="ss1"></span>
       </div>
       <hr />
+      <h3>Node Select</h3>
       <input type="button" value="Node Select" onclick="getSelect()" />
-      <div id="section2">
-        <h3>Node Select</h3>
+      <div id="section2" style="margin-top: 20px;">
         <span id="ss2"></span>
       </div>
       <hr />
-      <input type="button" value="Python randomUUID" onclick="getRandom()" />
-      <div id="section2">
-        <h3>Python randomUUID</h3>
+      <h3>Python random UUID</h3>
+      <input type="button" value="Python randomUUID" onclick="getRandomUUID()" />
+      <div id="section2" style="margin-top: 20px;">
         <span id="ss3"></span>
       </div>
       <hr />
-      <input type="button" value="JSON-Server Users" onclick="getUsers()" />
-      <div id="section3">
-        <h3>Json-server users</h3>
+      <h3>Python random Num</h3>
+      <input type="text" id="input_max">
+      <input type="button" value="Python randomNum" onclick="getRandomNum()" />
+      <div id="section2" style="margin-top: 20px;">
         <span id="ss4"></span>
+      </div>
+      <hr />
+      <h3>Json-server users</h3>
+      <input type="button" value="JSON-Server Users" onclick="getUsers()" />
+      <div id="section3" style="margin-top: 20px;">
+        <span id="ss5"></span>
       </div>
     </form>
     <hr />

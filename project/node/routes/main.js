@@ -41,6 +41,20 @@ app.get('/randomUUID', (req, res) => {
         })
 })
 
+app.get('/randomNum', (req, res) => {
+    param = req.query.max
+    axios
+        .get('http://192.168.1.12:3000/randomNum', { params: { max: param } })
+        .then(response => {
+            console.log(`statusCode : ${response.status}`)
+            console.log(response.data)
+            res.send({ result: response.data })
+        })
+        .catch(error => {
+            console.log(error)
+        })
+})
+
 app.get('/users', (req, res) => {
     axios
         .get('http://192.168.1.12:5000/users')
