@@ -79,6 +79,15 @@ async def main():
                         console.log(res);
                         const element = document.getElementById("ss1");
                         element.innerHTML = JSON.stringify(res);
+                        var imgList = document.getElementById('imgSelect');
+                        imgList.innerHTML = "";
+                        for (var i = 0; i < res.length; i++) {
+                            val = res[i]['filename']
+                            console.log(val)
+                            var option = document.createElement('option')
+                            option.innerHTML = val;
+                            imgList.append(option)
+                        }
                     } else {
                         console.log("HTTP error", xhr.status, xhr.statusText);
                     }
@@ -86,7 +95,7 @@ async def main():
             }
 
             function showImage() {
-                const inputVal = document.getElementById("imageName").value;
+                const inputVal = document.getElementById("imgSelect").value;
                 const element = document.getElementById("ss2");
                 const tag = '<img src="/images/' + inputVal +  '">';
                 element.innerHTML = tag;
@@ -104,7 +113,7 @@ async def main():
          <span id="ss1"></span>
         </div>
         <hr />
-        <input type="text" id="imageName">
+        <select id="imgSelect" style="width=100px">
         <input type="button" value="Show Image" onclick="showImage()">
         <div id="section2" style="margin-top: 20px;">
          <span id="ss2"></span>
