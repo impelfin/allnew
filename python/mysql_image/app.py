@@ -77,8 +77,10 @@ async def main():
                     if (xhr.status === 200) {
                         const res = JSON.parse(xhr.response);
                         console.log(res);
-                        const element = document.getElementById("ss1");
-                        element.innerHTML = JSON.stringify(res);
+                        const element1 = document.getElementById("ss1");
+                        element1.innerHTML = JSON.stringify(res);
+                        const element2 = document.getElementById("ss2");
+                        element2.innerHTML = "";
                         var imgList = document.getElementById('imgSelect');
                         imgList.innerHTML = "";
                         for (var i = 0; i < res.length; i++) {
@@ -97,7 +99,10 @@ async def main():
             function showImage() {
                 const inputVal = document.getElementById("imgSelect").value;
                 const element = document.getElementById("ss2");
-                const tag = '<img src="/images/' + inputVal +  '">';
+                if (inputVal == "") 
+                    var tag = '<h4>Select Image DB 버튼을 누르세요.</h4>';
+                else
+                    var tag = '<img src="/images/' + inputVal +  '">';
                 element.innerHTML = tag;
             }
         </script>
