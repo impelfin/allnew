@@ -1,5 +1,5 @@
 import pandas as pd 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from PIL import Image
 import base64
 from io import BytesIO
@@ -36,43 +36,99 @@ DB_URL = f'mysql+pymysql://{USERNAME}:{PASSWORD}@{HOSTNAME}:{PORT}/{DBNAME}'
 engine = create_engine(DB_URL, pool_recycle=500)
 
 def InsertImageDB(filename):
+    os.chdir('./images')
 ## jpg dpi 100x100, png dpi 72x72
     with open(filename, "rb") as image_file:
         binary_image = image_file.read()
         binary_image = base64.b64encode(binary_image)
         binary_image = binary_image.decode('UTF-8')
-        img_df = pd.DataFrame({'image_data':[binary_image]})
+        img_df = pd.DataFrame({'filename':filename,'image_data':[binary_image]})
         img_df.to_sql('images', con=engine, if_exists='append', index=False)
     return f'Image file : {filename} Inserted~!!'
+
+def SelectImageDB():
+    with engine.connect() as conn:
+        result = conn.execute(text("select * from images"))
+        resultDict = []
+        for row in result:
+            resultDict.append({"id" : row.id, "filename":row.filename})
+        print(resultDict)
+    return resultDict
 
 # “/”로 접근할 때 보여줄 HTML 코드 (가장 기본적으로 보여지는 부분)
 @app.get("/")
 async def main():
     content = """
-<body>
-<h3>Image File Upload to MySQL DB</h3>
-<form action="/uploadfiles/" enctype="multipart/form-data" method="post">
-<input name="files" type="file" multiple>
-<input type="submit">
-</form>
-</body>
+        <head>
+        <script>
+            function getImagesList() {
+                const xhr = new XMLHttpRequest();
+                const method = "GET";
+                const url = "/selectImages";
+                xhr.open(method, url);
+                xhr.setRequestHeader("content-type", "application/json");
+                xhr.send();
+
+                xhr.onload = () => {
+                    if (xhr.status === 200) {
+                        const res = JSON.parse(xhr.response);
+                        console.log(res);
+                        const element = document.getElementById("ss1");
+                        element.innerHTML = JSON.stringify(res);
+                    } else {
+                        console.log("HTTP error", xhr.status, xhr.statusText);
+                    }
+                };
+            }
+
+            function showImage() {
+                const inputVal = document.getElementById("imageName").value;
+                const element = document.getElementById("ss2");
+                tag = '<img src="./images/"'+ inputVal +'">"'
+                element.innerHTML = tag;
+            }
+        </script>
+        </head>
+        <body>
+        <h3>Image File Upload to MySQL DB</h3>
+        <form action="/uploadfiles/" enctype="multipart/form-data" method="post">
+        <input name="files" type="file" multiple>
+        <input type="submit">
+        <hr />
+        <input type="button" value="Select Image DB" onclick="getImagesList()">
+        <div id="section1" style="margin-top: 20px;">
+         <span id="ss1"></span>
+        </div>
+        <hr />
+        <input type="text" id="imageName">
+        <input type="button" value="Show Image" onclick="showImage()">
+        <div id="section2" style="margin-top: 20px;">
+         <span id="ss2"></span>
+        </div>
+        </form>
+        </body>
     """
     return HTMLResponse(content=content)
 
+if __name__ == '__main__':
+    uvicorn.run(app, host="0.0.0.0", port=3000)
+
 @app.post("/uploadfiles/")
 async def create_upload_files(files: List[UploadFile] = File(...)):
-    UPLOAD_DIRECTORY = "./"
+    UPLOAD_DIRECTORY = "./images"
+    os.makedirs("./images", exist_ok=True)
     for file in files:
         contents = await file.read()
         with open(os.path.join(UPLOAD_DIRECTORY, file.filename), "wb") as fp:
             fp.write(contents)
 
     filename = [file.filename for file in files]
-    print({"filenames": filename})  
+    print({"filename": filename})  
 
     result = InsertImageDB(filename[0])
     return result
-
-if __name__ == '__main__':
-    uvicorn.run(app, host="0.0.0.0", port=3000)
-    
+  
+@app.get('/selectImages')
+async def selectImages():
+    result = SelectImageDB()
+    return result
