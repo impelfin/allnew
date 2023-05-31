@@ -25,6 +25,7 @@ maven/target
 node/**/node_modules
 node/**/package-lock.json
 node/config/pool.js
+node/config/db_config.json
 
 ## python
 python/**/.venv
