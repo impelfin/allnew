@@ -51,7 +51,7 @@ def predict_yolo(imgName):
     for i in range(len(boxes)):
         if i in indexes:
             x, y, w, h = boxes[i]
-            confidence = str(round(confidences[i],2))
+            confidence = str(int(round(confidences[i],2) * 100)) + "%"
             label = str(classes[class_ids[i]]) + " " + confidence
             color = colors[i]
             cv2.rectangle(img, (x, y), (x + w, y + h), color, 2)
