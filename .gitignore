@@ -33,6 +33,9 @@ python/**/__pycache__/
 python/**/.idea
 python/secret.json
 **/secret.json
+**/yolov3.weights
+**/yolov3.cfg
+**/coco.names
 
 ## mongodb
 mongodb/*.json
