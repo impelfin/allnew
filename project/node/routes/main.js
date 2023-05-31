@@ -30,7 +30,7 @@ app.get('/select', (req, res) => {
 
 app.get('/randomUUID', (req, res) => {
     axios
-        .get('http://192.168.1.12:3000/randomUUID')
+        .get('http://192.168.1.8:3000/randomUUID')
         .then(response => {
             console.log(`statusCode : ${response.status}`)
             console.log(response.data)
@@ -44,7 +44,7 @@ app.get('/randomUUID', (req, res) => {
 app.get('/randomNum', (req, res) => {
     param = req.query.max
     axios
-        .get('http://192.168.1.12:3000/randomNum', { params: { max: param } })
+        .get('http://192.168.1.8:3000/randomNum', { params: { max: param } })
         .then(response => {
             console.log(`statusCode : ${response.status}`)
             console.log(response.data)
@@ -57,7 +57,7 @@ app.get('/randomNum', (req, res) => {
 
 app.get('/users', (req, res) => {
     axios
-        .get('http://192.168.1.12:5000/users')
+        .get('http://192.168.1.8:5000/users')
         .then(response => {
             console.log(`statusCode : ${response.status}`)
             console.log(response.data)
