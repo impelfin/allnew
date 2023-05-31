@@ -13,6 +13,7 @@ import json
 
 app = FastAPI()
 
+os.makedirs("./images", exist_ok=True)
 app.mount("/images", StaticFiles(directory="./images"), name='images')
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.relpath("./")))
@@ -134,7 +135,6 @@ if __name__ == '__main__':
 @app.post("/uploadfiles/")
 async def create_upload_files(files: List[UploadFile] = File(...)):
     UPLOAD_DIRECTORY = "./images"
-    os.makedirs("./images", exist_ok=True)
     for file in files:
         contents = await file.read()
         with open(os.path.join(UPLOAD_DIRECTORY, file.filename), "wb") as fp:
