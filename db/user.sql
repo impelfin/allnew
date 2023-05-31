@@ -3,3 +3,8 @@ CREATE TABLE `user` (
   `passwd` char(8) DEFAULT NULL,
   PRIMARY KEY (`userid`)
 )
+
+insert into testdb.user values('moon', '1234');
+insert into testdb.user values('admin', '1234');
+insert into testdb.user values('root', '1234');
+
