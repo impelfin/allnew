@@ -11,7 +11,9 @@ import os.path
 app = FastAPI()
 
 os.makedirs("./images", exist_ok=True)
+os.makedirs("./results", exist_ok=True)
 app.mount("/images", StaticFiles(directory="./images"), name='images')
+app.mount("/results", StaticFiles(directory="./results"), name='results')
 
 # “/”로 접근할 때 보여줄 HTML 코드 (가장 기본적으로 보여지는 부분)
 @app.get("/")
@@ -35,11 +37,11 @@ async def main():
                         if (imgList.length === 0) {
                             imgList.innerHTML = "";
                             for (var i = 0; i < res.length; i++) {
-                                val = res[i]
+                                val = res[i];
                                 console.log(val)
                                 var option = document.createElement('option')
                                 option.innerHTML = val;
-                                imgList.append(option)
+                                imgList.append(option)                             
                             }  
                         } else {
                             console.log(imgList.value)
@@ -64,7 +66,7 @@ async def main():
                         const res = JSON.parse(xhr.response);
                         console.log(res);
                         const element = document.getElementById("ss1");
-                        var tag = '<img src="/images/' + res +  '">';
+                        var tag = '<img src="/results/' + res +  '"' + ' width="60%" height="80%"' + '>';
                         element.innerHTML = tag;
                     } else {
                         console.log("HTTP error", xhr.status, xhr.statusText);
@@ -170,6 +172,7 @@ async def predict_yolo(imgName):
             cv2.putText(img, label, (x, y + 30), font, 3, color, 3)
     imgName = imgName[:-4]
     result = imgName+"_result.jpg"
+    os.chdir('../results')
     cv2.imwrite(result, img)
     os.chdir('../')
     return result
