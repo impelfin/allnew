@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+from PIL import Image
 
 # Yolo 로드
 net = cv2.dnn.readNet("yolov3.weights", "yolov3.cfg")
