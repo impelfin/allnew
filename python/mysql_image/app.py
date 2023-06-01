@@ -2,6 +2,7 @@ import pandas as pd
 from sqlalchemy import create_engine, text
 from PIL import Image
 import base64
+import io
 from io import BytesIO
 from typing import List
 from fastapi import FastAPI, File, UploadFile
@@ -14,7 +15,9 @@ import json
 app = FastAPI()
 
 os.makedirs("./images", exist_ok=True)
+os.makedirs("./results", exist_ok=True)
 app.mount("/images", StaticFiles(directory="./images"), name='images')
+app.mount("/results", StaticFiles(directory="./results"), name='results')
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.relpath("./")))
 secret_file = os.path.join(BASE_DIR, '../secret.json')
@@ -97,13 +100,35 @@ async def main():
                 };
             }
 
-            function showImage() {
-                const inputVal = document.getElementById("imgSelect").value;
+            function getImageDB() {
+                var inputVal = document.getElementById('imgSelect').value;
+                if (inputVal == "") {
+                    var tag = '<h4>먼저 Select Image DB 버튼을 누르세요.</h4>';
+                } else {
+                    const xhr = new XMLHttpRequest();
+                    const method = "GET";
+                    var url = "/getImageFromDB";
+                    url += "?inputVal="
+                    url += inputVal
+                    xhr.open(method, url);
+                    xhr.setRequestHeader("content-type", "application/json");
+                    xhr.send();
+
+                    xhr.onload = () => {
+                        if (xhr.status === 200) {
+                            const res = JSON.parse(xhr.response);
+                            console.log(res);
+                            showImage(res)
+                        } else {
+                            console.log("HTTP error", xhr.status, xhr.statusText);
+                        }
+                    };
+                }
+            }
+
+            function showImage(res) {
                 const element = document.getElementById("ss2");
-                if (inputVal == "") 
-                    var tag = '<h4>Select Image DB 버튼을 누르세요.</h4>';
-                else
-                    var tag = '<img src="/images/' + inputVal +  '"' + ' width="70%" height="70%"' + '>';
+                var tag = '<img src="/results/' + res +  '"' + ' width="70%" height="70%"' + '>';
                 element.innerHTML = tag;
             }
         </script>
@@ -120,7 +145,7 @@ async def main():
         </div>
         <hr />
         <select id="imgSelect" style="width=100px">
-        <input type="button" value="Show Image" onclick="showImage()">
+        <input type="button" value="Show Image" onclick="getImageDB()">
         <div id="section2" style="margin-top: 20px;">
          <span id="ss2"></span>
         </div>
@@ -150,3 +175,21 @@ async def create_upload_files(files: List[UploadFile] = File(...)):
 async def selectImages():
     result = SelectImageDB()
     return result
+
+@app.get('/getImageFromDB')
+async def getImageFromDB(inputVal):
+    with engine.connect() as conn:
+        result = conn.execute(text(f"select * from images where filename='{inputVal}'"))
+        data = []
+        for row in result:
+            data.append(row.image_data)
+
+        inputVal = inputVal[:-4]
+        result = inputVal + "_result.jpg"
+        os.chdir('./results')
+        img = base64.b64decode(data[0])
+        im = Image.open(BytesIO(img))
+        im.save(result, "jpeg")
+        os.chdir('../')
+    return result
+
