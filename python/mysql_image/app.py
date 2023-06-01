@@ -103,7 +103,7 @@ async def main():
                 if (inputVal == "") 
                     var tag = '<h4>Select Image DB 버튼을 누르세요.</h4>';
                 else
-                    var tag = '<img src="/results/' + inputVal +  '"' + ' width="70%" height="70%"' + '>';
+                    var tag = '<img src="/images/' + inputVal +  '"' + ' width="70%" height="70%"' + '>';
                 element.innerHTML = tag;
             }
         </script>
