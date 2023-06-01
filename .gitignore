@@ -33,6 +33,7 @@ python/**/__pycache__/
 python/**/.idea
 python/secret.json
 **/secret.json
+python/mysql_image/images
 python/yolo_fastapi/images
 python/yolo_fastapi/results
 **/yolov3.weights
