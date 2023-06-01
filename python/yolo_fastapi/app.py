@@ -66,7 +66,7 @@ async def main():
                         const res = JSON.parse(xhr.response);
                         console.log(res);
                         const element = document.getElementById("ss1");
-                        var tag = '<img src="/results/' + res +  '"' + ' width="600px" height="600px"' + '>';
+                        var tag = '<img src="/results/' + res +  '"' + ' width="80*" height="80%"' + '>';
                         element.innerHTML = tag;
                     } else {
                         console.log("HTTP error", xhr.status, xhr.statusText);
