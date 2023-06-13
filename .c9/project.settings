@@ -5,7 +5,8 @@
         "@editor.snippetSuggestions": "top",
         "@editor.suggest.preview": true,
         "@editor.suggest.showMethods": true,
-        "@git.autofetch": true
+        "@git.autofetch": true,
+        "@git.enableSmartCommit": true
     },
     "language": {
         "tern_defs": {
