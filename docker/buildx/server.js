@@ -6,7 +6,7 @@ const port='8000'
 const server = http.createServer(function (req, res) {
     res.statusCode=200;
     res.setHeader('Content-Type','text/plain');
-    res.end('Hello from NodeJS in ${process.arch}!\n');
+    res.end(`Hello from NodeJS in ${process.arch}!\n`);
 });
 
 server.listen(port, hostname, () => {
