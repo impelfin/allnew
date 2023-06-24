@@ -1,7 +1,7 @@
 build:
 	docker build -t ubuntu:x .
 run:
-	docker run -it --name ubuntu -d -p 8000:80 ubuntu:x 
+	docker run -it -d -p 8000:80 --name ubuntu ubuntu:x 
 exec:
 	docker exec -it ubuntu /bin/bash 
 ps:
@@ -9,8 +9,6 @@ ps:
 img:
 	docker images
 rm:
-	docker stop ubuntu
-	docker rm ubuntu
+	docker rm -f $$(docker ps -aq)
 rmi:
-	docker rmi ubuntu 
-	docker rmi ubuntu:x
+	docker rmi $$(docker images -q)

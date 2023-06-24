@@ -10,6 +10,6 @@ ps:
 img:
 	docker images
 rm:
-	docker rm centos
+	docker rm -f $$(docker ps -aq)
 rmi:
-	docker rmi centos:centos7
+	docker rmi $$(docker images -q)
