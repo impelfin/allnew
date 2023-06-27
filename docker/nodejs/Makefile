@@ -1,7 +1,7 @@
 build:
 	docker build -t nodejs .
 run:
-	docker run -it -d -p 8000:8000 -v /User/MINHUI/Document/GitHub/nodejs:/app --name nodejs nodejs
+	docker run -it -d -p 8000:8000 -v /User/impelfin/Document/GitHub/nodejs:/app --name nodejs nodejs
 exec:
 	docker exec -it nodejs /bin/bash
 logs:

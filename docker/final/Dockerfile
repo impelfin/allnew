@@ -5,7 +5,7 @@ FROM node:16
 WORKDIR /usr/src/app
 
 # step 3
-RUN git clone http://github.com/westmini427/docker-publish
+RUN git clone http://github.com/impelfin/docker-publish
 WORKDIR docker-publish/worldcup
 RUN npm install
 
