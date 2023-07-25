@@ -4,7 +4,7 @@ import sys
 from boto3 import client
 
 # OpenAI API key setup
-api_key = "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"
+api_key = "sk-"
 openai.api_key = api_key
 
 # FAQ data
