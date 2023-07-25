@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import openai
 import os
 import sys
@@ -45,21 +48,20 @@ while True:
         gpt_answer = get_gpt_answer(user_input)
         print("GPT-3.5:", gpt_answer)
 
-polly = client("polly", region_name="ap-northeast-2")
-response = polly.synthesize_speech(
-        Text=gpt_answer,
-        OutputFormat="mp3",
-        VoiceId="Seoyeon")
+    polly = client("polly", region_name="ap-northeast-2")
+    response = polly.synthesize_speech(
+            Text=gpt_answer,
+            OutputFormat="mp3",
+            VoiceId="Seoyeon")
 
-stream = response.get("AudioStream")
+    stream = response.get("AudioStream")
 
-with open('aws_test_tts.mp3', 'wb') as f:
-    data = stream.read()
-    f.write(data)
+    with open('aws_test_tts.mp3', 'wb') as f:
+        data = stream.read()
+        f.write(data)
 
 
-cmd = "omxplayer -o both aws_test_tts.mp3"
+    cmd = "omxplayer -o both aws_test_tts.mp3"
 
-return_value = os.system(cmd)
-print('return value: ', return_value)
-
+    return_value = os.system(cmd)
+    print('return value: ', return_value)
