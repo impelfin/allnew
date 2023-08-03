@@ -28,6 +28,7 @@ node/config/pool.js
 node/config/db_config.json
 
 ## python
+**/.venv
 python/**/.venv
 python/**/__pycache__/
 python/**/.idea
